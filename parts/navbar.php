@@ -3,11 +3,18 @@
         <a class="navbar-item" href="#">
             <h2 class="has-text-white">BayviewJudge</h2>
         </a>
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
     </div>
+
+
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="field is-grouped">
+                <p class="control">
+                    <a class="button is-primary">Login</a>
+                    <a class="button is-light">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
 </nav>
