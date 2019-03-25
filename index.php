@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+$config = include('./config.php');
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +33,10 @@
                     <div class="hero-body">
                         <div class="container">
                             <h1 class="title">
-                                Primary bold title
+                                Bayview Computer Club
                             </h1>
                             <h2 class="subtitle">
-                                This is still under development.
+                                Libre Online Judging Platform
                             </h2>
                         </div>
                     </div>
