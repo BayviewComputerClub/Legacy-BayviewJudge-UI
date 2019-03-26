@@ -28,7 +28,7 @@ $config = include('./config.php');
         <!-- Main Content -->
         <div class="column">
 
-            <div class="container">
+            <div class="container column is-four-fifths">
                 <section class="hero is-medium is-primary is-bold">
                     <div class="hero-body">
                         <div class="container">

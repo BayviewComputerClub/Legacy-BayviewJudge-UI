@@ -28,7 +28,7 @@ $config = include('../config.php');
         <!-- Main Content -->
         <div class="column">
 
-            <div class="container">
+            <div class="container column is-11">
                 <?php
 
                 if (isset($_POST['reg_user'])) {
@@ -159,7 +159,7 @@ $config = include('../config.php');
 
                                         </form>
                                     </div>
-                                    <div class="column is-two-fifths">
+                                    <div class="column is-4">
                                         <div class="card">
                                             <div class="card-content">
                                                 <p class="title has-text-black">
