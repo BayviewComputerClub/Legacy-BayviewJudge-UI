@@ -1,6 +1,7 @@
 <?php
 session_start();
 $config = include('../config.php');
+include('../parts/error.php');
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +35,10 @@ $config = include('../config.php');
                 if (isset($_POST['reg_user'])) {
                     // Connect to MariaDB
                     $db = mysqli_connect($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
+                    if (!$db) {
+                        printError("MySQL Error ", mysqli_connect_error());
+                    }
+
 
                     $errors = array();
 
