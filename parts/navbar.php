@@ -2,6 +2,7 @@
     <div class="navbar-brand">
         <a class="navbar-item" href="../index.php">
             <h2 class="has-text-white">BayviewJudge</h2>
+            <img src="<?php $config['site_root'] ?>/logo.png" />
         </a>
     </div>
 
