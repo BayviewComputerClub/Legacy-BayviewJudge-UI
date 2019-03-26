@@ -1,5 +1,5 @@
 <?php
 function printError($msg, $error) {
-    die("BayviewJudge has run into an error and cannot continue: $msg <br /> $error <br /><hr /> If this is the first time you are seeing this message, try again. If the problem persists: File a bug report @ <a href='https://github.com/BayviewComputerClub/BayviewJudge/issues'>https://github.com/BayviewComputerClub/BayviewJudge/</a>");
+    die("BayviewJudge has run into the following error: <br /> $msg <br /> $error <br /><hr /> Try connecting to the internet or refreshing the page. If the problem persists, take a screenshot and file a <a href='https://github.com/BayviewComputerClub/BayviewJudge/issues'>bug report</a>");
 }
 ?>
