@@ -73,7 +73,7 @@ $config = include('../config.php');
 
                     //If there are errors, print them.
                     if (count($errors) > 0) {
-                        print '<h1>There was an error registering:</h1>';
+                        print '<h1>There was an error logging in:</h1>';
                         foreach ($errors as $error) {
                             print "- $error<br />";
                         }

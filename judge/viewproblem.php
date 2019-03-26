@@ -65,9 +65,39 @@ $config = include('../config.php');
                         print '<p>Memory Limit: ' . $problem['memlimit'] . 'MB</p>';
                         print '<p>Time Limit: ' . $problem['timelimit'] . 'ms </p>';
                         print '<hr />';
-                        print '<a href="" class="button">Submit Solution</a>';
+                        //print '<a href="" class="button">Submit Solution</a>';
 
                         ?>
+
+                        <div class="column is-half">
+                            <form action="submitproblem.php" method="post">
+                                <div class="field">
+                                    <label class="label">Language</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="e.g c++" name="lang">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Code</label>
+                                    <div class="control">
+                                        <textarea class="textarea" type="textarea" placeholder="Paste Code here" name="inputcode"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Extra Params -->
+                                <input type="hidden" name="problemid" value="<?php print $requestedProblem ?>" />
+
+                                <hr />
+
+                                <div class="field">
+                                    <div class="control">
+                                        <input class="button" type="submit" value="Submit" name="submit_code">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
                 </section>
 
