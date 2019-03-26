@@ -1,2 +1,2 @@
 # BayviewJudge-UI
-Let's try and write a judge!!!
+BayviewJudge Site and UI
