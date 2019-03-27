@@ -75,7 +75,7 @@ if(!$_SESSION['isadmin']) {
 
                                             if (mysqli_num_rows($result) > 0) {
                                                 while($row = mysqli_fetch_assoc($result)) {
-                                                    echo "<tr><td> " . $row["name"] . "</td><td>" . $row["points"] ."</td><td><a href='./viewproblem.php?id=" . $row['id'] . "' class='button'>Edit</a></td></tr>";
+                                                    echo "<tr><td> " . $row["name"] . "</td><td>" . $row["points"] ."</td><td><a href='./editproblem.php?id=" . $row['id'] . "' class='button'>Edit</a></td></tr>";
                                                 }
                                             } else {
                                                 echo "Error: No problems found (Yell at Seshan)";
@@ -93,77 +93,155 @@ if(!$_SESSION['isadmin']) {
                 <!-- Edit Block -->
 
                 <?php
-                    $name = "";
-                    $details = "";
-                    if(isset($_GET['id'])) {
+
+                    if(isset($_POST['edit_problem'])) {
+                        // UPDATE `problems` SET `memlimit` = '101' WHERE `problems`.`id` = 4
+                        $db = mysqli_connect($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
+                        if (!$db) {
+                            die("Connection failed: " . mysqli_connect_error());
+                        }
+
+                        $problemid = $_POST['problemid'];
+
+                        $name = $_POST['name'];
+                        $details = $_POST['details'];
+                        $memlimit = $_POST['memlimit'];
+                        $timelimit = $_POST['timelimit'];
+                        $points = $_POST['points'];
+
+                        $sample_input = base64_encode($_POST['sample_input']);
+                        $sample_output = base64_encode($_POST['sample_output']);
+
+                        $input = base64_encode($_POST['input']);
+                        $output = base64_encode($_POST['output']);
+
+                        $category = $_POST['category'];
+
+
+                        $problem_query = "UPDATE problems SET name = '$name', details = '$details', memlimit = '$memlimit', points = '$points', sample_input = '$sample_input', sample_output = '$sample_output', input = '$input', output = '$output', category = '$category' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+                        var_dump($result);
+                        print 'The problem has been updated!';
 
                     }
+
+                    if(isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        $db = mysqli_connect($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
+                        if (!$db) {
+                            die("Connection failed: " . mysqli_connect_error());
+                        }
+
+                        $problem_query = "SELECT * FROM problems WHERE id=$id LIMIT 1";
+                        $result = mysqli_query($db, $problem_query);
+                        $problem = mysqli_fetch_assoc($result);
+
                 ?>
 
-                <section class="hero is-medium is-primary is-bold">
-                    <div class="hero-body">
-                        <div class="container">
-                            <h1 class="title">
-                                Edit:
-                            </h1>
-                            <div class="columns">
-                                <div class="column is-three-quarters">
-                                    <form action="createproblem.php" method="post">
-                                        <div class="field">
-                                            <label class="label">Name</label>
-                                            <div class="control">
-                                                <input class="input" type="text" placeholder="e.g A plus B" name="name">
+                    <section class="hero is-medium is-primary is-bold"> <!-- In if block-->
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title">
+                                    Edit:
+                                </h1>
+                                <div class="columns">
+                                    <div class="column is-three-quarters">
+                                        <form action="editproblem.php" method="post">
+
+                                            <!-- Extra Params -->
+                                            <input type="hidden" name="problemid" value="<?php print $id ?>" />
+
+                                            <div class="field">
+                                                <label class="label">Name</label>
+                                                <div class="control">
+                                                    <input class="input" type="text" placeholder="e.g A plus B" name="name" value="<?php print $problem['name']; ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
 
-                                        <div class="field">
-                                            <label class="label">Problem Details</label>
-                                            <div class="control">
-                                                <textarea id="problem_details" name="details"></textarea>
+                                            <div class="field">
+                                                <label class="label">Problem Details</label>
+                                                <div class="control">
+                                                    <textarea id="problem_details" name="details"><?php print $problem['details']; ?></textarea>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <hr />
+                                            <hr />
 
-                                        <div class="field">
-                                            <label class="label">Memory Limit (MB)</label>
-                                            <div class="control">
-                                                <input class="input" type="text" placeholder="1" name="memlimit">
+                                            <div class="field">
+                                                <label class="label">Memory Limit (MB)</label>
+                                                <div class="control">
+                                                    <input class="input" type="text" placeholder="1" name="memlimit" value="<?php print $problem['memlimit']; ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="field">
-                                            <label class="label">Time Limit (ms)</label>
-                                            <div class="control">
-                                                <input class="input" type="text" placeholder="1000" name="timelimit">
+                                            <div class="field">
+                                                <label class="label">Time Limit (ms)</label>
+                                                <div class="control">
+                                                    <input class="input" type="text" placeholder="1000" name="timelimit" value="<?php print $problem['timelimit']; ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="field">
-                                            <label class="label">Points</label>
-                                            <div class="control">
-                                                <input class="input" type="text" placeholder="2" name="points">
+                                            <div class="field">
+                                                <label class="label">Points</label>
+                                                <div class="control">
+                                                    <input class="input" type="text" placeholder="2" name="points" value="<?php print $problem['points']; ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <hr />
-
-                                        <div class="field">
-                                            <div class="control">
-                                                <input class="button" type="submit" value="Add" name="submit_problem">
+                                            <div class="field">
+                                                <label class="label">Category</label>
+                                                <div class="control">
+                                                    <input class="input" type="text" placeholder="2" name="category" value="<?php print $problem['category']; ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    </form>
+                                            <div class="field">
+                                                <label class="label">Sample Input (Displayed)</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="sample_input"><?php print base64_decode($problem['sample_input']); ?></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Sample Output (Displayed)</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="sample_output"><?php print base64_decode($problem['sample_output']); ?></textarea>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h3 class="subtitle">Test Cases:</h3>
+                                            <div class="field">
+                                                <label class="label">Input</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="input"><?php print base64_decode($problem['input']); ?></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Expected Output</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="output"><?php print base64_decode($problem['output']); ?></textarea>
+                                                </div>
+                                            </div>
+
+                                            <hr />
+
+                                            <div class="field">
+                                                <div class="control">
+                                                    <input class="button" type="submit" value="Edit" name="edit_problem">
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
                                 </div>
 
+
                             </div>
-
-
                         </div>
-                    </div>
-                </section>
+                    </section>
+
+                <?php } //end section if ?>
 
             </div>
         </div>

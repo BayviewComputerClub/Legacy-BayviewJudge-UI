@@ -81,33 +81,54 @@ function callAPI($data, $endpoint, $callType) {
                             $inputcode = $_POST['inputcode'];
                             $lang = $_POST['lang'];
 
+                            // Get the test cases from the database.
+                            $db = mysqli_connect($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
+                            if (!$db) {
+                                die("Connection failed: " . mysqli_connect_error());
+                            }
+
+                            $problem_query = "SELECT * FROM problems WHERE id=$problemid LIMIT 1";
+                            $query_result = mysqli_query($db, $problem_query);
+                            $result = mysqli_fetch_assoc($query_result);
+
                             $data = array(
                                 'userID' => $userid,
                                 'problemID' => $problemid,
                                 'inputCode' => base64_encode($inputcode),
-                                'lang' => $lang
+                                'lang' => $lang,
+                                'sample_input' => $result['sample_input'],
+                                'sample_output' => $result['sample_output'],
+                                'input' => $result['input'],
+                                'output' => $result['output'],
+                                'timelimit' => $result['timelimit'],
+                                'memlimit' => $result['memlimit']
                             );
 
                             $response = callAPI($data, '/v1/judge-submission', 'POST');
-                            $responseData = json_decode($response, TRUE);
-                            //var_dump($responseData);
-                            //print $responseData['score'];
-                            if($responseData['accepted']) {
-                                //print 'ok';
-                                for($i = 0; $i < $responseData['score'];$i++) {
-                                    print "Test Case $i: Accepted! <br />";
+                            if(!$response) {
+                                print 'There was an error with the judge server, please try again.';
+                            } else {
+                                $responseData = json_decode($response, TRUE);
+
+                                //print $responseData['score'];
+                                if($responseData['accepted']) {
+                                    //print 'ok';
+                                    for($i = 0; $i < $responseData['score'];$i++) {
+                                        print "Test Case $i: Accepted! <br />";
+                                    }
+                                    print '<hr />';
+                                    print '<p>Your submission passed all test cases!</p>';
+                                    // Give user the points.
+                                }else {
+                                    for($i = 0; $i < $responseData['score'];$i++) {
+                                        print "Test Case $i: Accepted! <br />";
+                                    }
+                                    print "Test Case $i: Not Accepted! <br />";
+                                    print '<hr />';
+                                    print 'Uh oh, Your submission was not accepted!';
                                 }
-                                print '<hr />';
-                                print '<p>Your submission passed all test cases!</p>';
-                                // Give user the points.
-                            }else {
-                                for($i = 0; $i < $responseData['score'];$i++) {
-                                    print "Test Case $i: Accepted! <br />";
-                                }
-                                print "Test Case $i: Not Accepted! <br />";
-                                print '<hr />';
-                                print 'Uh oh, Your submission was not accepted!';
                             }
+
 
                         ?>
                     </div>

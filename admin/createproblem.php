@@ -62,11 +62,11 @@ if(!$_SESSION['isadmin']) {
                     $timelimit = $_POST['timelimit'];
                     $points = $_POST['points'];
 
-                    $sample_input = $_POST['sample_input'];
-                    $sample_output = $_POST['sample_output'];
+                    $sample_input = base64_encode($_POST['sample_input']);
+                    $sample_output = base64_encode($_POST['sample_output']);
 
-                    $input = $_POST['input'];
-                    $output = $_POST['output'];
+                    $input = base64_encode($_POST['input']);
+                    $output = base64_encode($_POST['output']);
 
                     $category = $_POST['category'];
 
@@ -76,6 +76,7 @@ if(!$_SESSION['isadmin']) {
                     if (empty($timelimit)) { array_push($errors, "Time Execution Limit is required"); }
                     if (empty($points)) { array_push($errors, "Points is required"); }
                     if (empty($details)) { array_push($errors, "Details is required"); }
+                    if (empty($category)) { array_push($errors, "Category is required"); }
 
                     if (empty($sample_input)) { array_push($errors, "Sample Input is required"); }
                     if (empty($sample_output)) { array_push($errors, "Sample Output is required"); }
@@ -87,16 +88,16 @@ if(!$_SESSION['isadmin']) {
                     //If there are no errors, write the user to the database
                     if (count($errors) == 0) {
 
-                        $query = "INSERT INTO problems (name, details, timelimit, memlimit, points) VALUES('$name', '$details', $timelimit, $memlimit, $points)";
+                        $query = "INSERT INTO problems (name, details, timelimit, memlimit, points, sample_input, sample_output, category, input, output) VALUES('$name', '$details', $timelimit, $memlimit, $points, '$sample_input', '$sample_output', '$category', '$input', '$output')";
                         mysqli_query($db, $query);
 
 
                         print "Yay! The problem was added! 🎉";
-                        print '<br /><a class="button is-primary" href="createproblem.php">Ok</a>';
+                        print '<br /><a class="button is-primary" href="index.php">Ok</a>';
                         print '<br />><b>Now go bug Seshan to add your testcases to the grading server.</b>';
 
                     } else {
-                        print '<h1>There was an error registering:</h1>';
+                        print '<h1>There was an error adding the problem:</h1>';
                         foreach ($errors as $error) {
                             print "- $error<br />";
                         }
