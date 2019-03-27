@@ -61,6 +61,9 @@ $config = include('../config.php');
                             // Set the session, i.e login.
                             $_SESSION['username'] = $username;
                             $_SESSION['id'] = $id;
+                            if($result_id['role'] > 0) { //TODO more advanced roles.
+                                $_SESSION['isadmin'] = true;
+                            }
 
                             print "Yay! $username, You are now logged in 🎉 <br />";
                             print '<a class="button is-primary" href="../index.php">Home</a>';

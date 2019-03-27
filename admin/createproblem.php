@@ -7,7 +7,11 @@ if(!isset($_SESSION['username'])) {
     header("Location: ../index.php");
     die();
 }
-
+// Is the user not an admin?
+if(!$_SESSION['isadmin']) {
+    header("Location: ../index.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +23,7 @@ if(!isset($_SESSION['username'])) {
     <link rel="stylesheet" href="<?php $config['site_root'] ?>/css/bulma.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
-    <script src='https://cloud.tinymce.com/5/tinymce.min.js'></script>
+    <script src='<?php $config['site_root'] ?>/tinymce/tinymce.min.js'></script>
     <script>
         tinymce.init({
             selector: '#problem_details'
@@ -58,6 +62,13 @@ if(!isset($_SESSION['username'])) {
                     $timelimit = $_POST['timelimit'];
                     $points = $_POST['points'];
 
+                    $sample_input = $_POST['sample_input'];
+                    $sample_output = $_POST['sample_output'];
+
+                    $input = $_POST['input'];
+                    $output = $_POST['output'];
+
+                    $category = $_POST['category'];
 
                     // Deal with input errors
                     if (empty($name)) { array_push($errors, "Name is required"); }
@@ -65,6 +76,12 @@ if(!isset($_SESSION['username'])) {
                     if (empty($timelimit)) { array_push($errors, "Time Execution Limit is required"); }
                     if (empty($points)) { array_push($errors, "Points is required"); }
                     if (empty($details)) { array_push($errors, "Details is required"); }
+
+                    if (empty($sample_input)) { array_push($errors, "Sample Input is required"); }
+                    if (empty($sample_output)) { array_push($errors, "Sample Output is required"); }
+
+                    if (empty($input)) { array_push($errors, "Test Case Input is required"); }
+                    if (empty($output)) { array_push($errors, "Test Case Output is required"); }
 
 
                     //If there are no errors, write the user to the database
@@ -132,6 +149,40 @@ if(!isset($_SESSION['username'])) {
                                                 <label class="label">Points</label>
                                                 <div class="control">
                                                     <input class="input" type="text" placeholder="2" name="points">
+                                                </div>
+                                            </div>
+
+                                            <div class="field">
+                                                <label class="label">Category</label>
+                                                <div class="control">
+                                                    <input class="input" type="text" placeholder="2" name="category">
+                                                </div>
+                                            </div>
+
+                                            <div class="field">
+                                                <label class="label">Sample Input (Displayed)</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="sample_input"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Sample Output (Displayed)</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="sample_output"></textarea>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h3 class="subtitle">Test Cases:</h3>
+                                            <div class="field">
+                                                <label class="label">Input</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="input"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Expected Output</label>
+                                                <div class="control">
+                                                    <textarea class="textarea" type="text" placeholder="123" name="output"></textarea>
                                                 </div>
                                             </div>
 

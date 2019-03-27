@@ -80,7 +80,7 @@ include('../parts/error.php');
 
 
 
-                        $query = "INSERT INTO users (username, password, email, points, full_name, school, profile_desc) VALUES('$username', '$password', '$email', 0, '$full_name', '$school', '')";
+                        $query = "INSERT INTO users (username, password, email, points, full_name, school, profile_desc, role) VALUES('$username', '$password', '$email', 0, '$full_name', '$school', '', 0)";
                         mysqli_query($db, $query);
 
                         // Query the users id.
