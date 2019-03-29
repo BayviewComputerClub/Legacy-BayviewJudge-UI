@@ -7,5 +7,5 @@ return array(
     'db_database' => 'bayviewjudge',
 
     'site_root' => 'http://localhost:8000',
-    'judge_url' => 'http://localhost:3000'
+    'judge_url' => 'http://159.203.32.18:3000'
 );
