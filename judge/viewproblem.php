@@ -28,7 +28,7 @@ $config = include('../config.php');
         <!-- Main Content -->
         <div class="column">
 
-            <div class="container">
+            <div class="container column is-four-fifths">
                 <section class="hero is-medium is-primary is-bold">
                     <div class="hero-body">
                         <div class="container">
@@ -61,6 +61,10 @@ $config = include('../config.php');
                         print '<h1 class="title">' . $problem['name'] . '</h1><hr />';
 
                         print '<p>' . $problem['details'] . '</p>';
+                        print '<h3 class="subtitle">Sample Input</h3>';
+                        print '<pre>' . base64_decode($problem['sample_input']) . '</pre>';
+                        print '<h3 class="subtitle">Sample Output</h3>';
+                        print '<pre>' . base64_decode($problem['sample_output']) . '</pre>';
                         print '<hr />';
                         print '<p>Memory Limit: ' . $problem['memlimit'] . 'MB</p>';
                         print '<p>Time Limit: ' . $problem['timelimit'] . 'ms </p>';
@@ -69,7 +73,7 @@ $config = include('../config.php');
 
                         ?>
 
-                        <div class="column is-half">
+                        <div class="column is-four-fifths">
                             <form action="submitproblem.php" method="post">
                                 <div class="field">
                                     <label class="label">Language</label>
@@ -100,6 +104,18 @@ $config = include('../config.php');
                         </div>
                     </div>
                 </section>
+                <hr />
+                <div id="disqus_thread"></div>
+                <script>
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://bayview-judge.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 
             </div>
         </div>

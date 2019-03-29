@@ -118,8 +118,37 @@ if(!$_SESSION['isadmin']) {
                         $category = $_POST['category'];
 
 
-                        $problem_query = "UPDATE problems SET name = '$name', details = '$details', memlimit = '$memlimit', points = '$points', sample_input = '$sample_input', sample_output = '$sample_output', input = '$input', output = '$output', category = '$category' WHERE id = $problemid ";
+                        // aaa.
+                        $problem_query = "UPDATE problems SET name = '$name' WHERE id = $problemid ";
                         $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET details = '$details' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET memlimit = '$memlimit' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET timelimit = '$timelimit' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET points = '$points' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET sample_input = '$sample_input' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET sample_output = '$sample_output' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET input = '$input' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET output = '$output' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
+                        $problem_query = "UPDATE problems SET category = '$category' WHERE id = $problemid ";
+                        $result = mysqli_query($db, $problem_query);
+
                         var_dump($result);
                         print 'The problem has been updated!';
 

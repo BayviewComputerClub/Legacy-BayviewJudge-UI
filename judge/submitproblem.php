@@ -119,6 +119,9 @@ function callAPI($data, $endpoint, $callType) {
                                     print '<hr />';
                                     print '<p>Your submission passed all test cases!</p>';
                                     // Give user the points.
+
+                                    $point_update_query = "UPDATE users SET points = points + 1 WHERE id = $userid
+                                   ";
                                 }else {
                                     for($i = 0; $i < $responseData['score'];$i++) {
                                         print "Test Case $i: Accepted! <br />";
