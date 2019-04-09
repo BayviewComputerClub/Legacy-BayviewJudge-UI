@@ -1,65 +1,38 @@
-<?php
-session_start();
-$config = include('./config.php');
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BayviewJudge</title>
-    <link rel="stylesheet" href="./css/bulma.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>BayviewJudge - Under Construction</title>
+
 </head>
-<body>
 
-<?php include './parts/navbar.php'; ?>
-
-<section class="section">
-
-    <div class="columns">
-
-        <!-- Vertical Nav -->
-        <div class="column is-one-fifth has-background-grey">
-            <?php include './parts/navpanel.php'; ?>
+<body style="padding-left: 300px;">
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">BayviewJudge</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Login</a></li>
+                <li><a href="badges.html">Register</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <!-- Main Content -->
-        <div class="column">
-
-            <div class="container column is-four-fifths">
-                <section class="hero is-medium is-primary is-bold">
-                    <div class="hero-body">
-                        <div class="container">
-                            <h1 class="title">
-                                BayviewJudge
-                            </h1>
-                            <h2 class="subtitle">
-                                Libre Online Judging Platform
-                            </h2>
-                        </div>
-                    </div>
-
-                </section>
-                <div id="disqus_thread"></div>
-                <script>
-                    (function() { // DON'T EDIT BELOW THIS LINE
-                        var d = document, s = d.createElement('script');
-                        s.src = 'https://bayview-judge.disqus.com/embed.js';
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-            </div>
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <div class="container">
+            <li>Navigation:</li>
+            <li><a href="#!">First Sidebar Link</a></li>
+            <li><a href="#!">Second Sidebar Link</a></li>
         </div>
-
-        </div>
-
-    </div>
-
-</section>
+    </ul>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 </html>
