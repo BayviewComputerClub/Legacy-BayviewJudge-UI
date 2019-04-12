@@ -6,6 +6,6 @@ return array(
     'db_password' => '',
     'db_database' => 'bayviewjudge',
 
-    'site_root' => 'http://localhost:8000/legacy',
+    'site_root' => 'http://localhost:8000',
     'judge_url' => 'http://localhost:3000'
 );
