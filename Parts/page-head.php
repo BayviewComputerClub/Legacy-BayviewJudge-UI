@@ -1,6 +1,9 @@
 <?php
+session_start();
 function renderPageHead($title) {
+    $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
     $pageRoot = $config['page_root'];
+    $username = $_SESSION['username'];
     return <<<HTML
 <!DOCTYPE html>
 <html>
@@ -20,11 +23,13 @@ function renderPageHead($title) {
     
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Logo</a>
+                <a href="$pageRoot/" class="brand-logo">Logo</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Contest - View Problems</a></li>
-                    <li><a href="badges.html">Login</a></li>
-                    <li><a href="collapsible.html">Register</a></li>
+                    
+                    <li><a href="$pageRoot/Problems">View Problems</a></li>
+                    <li><a href="$pageRoot/Auth/Login.php">Login</a></li>
+                    <li><a href="$pageRoot/Auth/Register.php">Register</a></li>
+                    <li>Hello, $username</li>
                 </ul>
             </div>
         </nav>

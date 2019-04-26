@@ -1,5 +1,6 @@
 <?php
 function renderPageFoot() {
+    $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
     $pageRoot = $config['page_root'];
     return <<<HTML
         

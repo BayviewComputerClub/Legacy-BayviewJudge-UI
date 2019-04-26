@@ -1,4 +1,5 @@
 <?php
+session_start();
 $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
@@ -22,7 +23,7 @@ if(isset($_POST['username'])) {
 
     //TODO check if duplicate username
 
-    $query = "INSERT INTO users (username, password, email, points, full_name, school, profile_desc) VALUES ('$username', '$password', 'john@example.com', 0, 'hi', 'hi2', 'hi')";
+    $query = "INSERT INTO users (username, password, email, points, full_name, school, profile_desc) VALUES ('$username', '$password', '$email', 0, '$full_name', 'Bayview Secondary School', 'Default User')";
 
     if ($conn->query($query) === TRUE) {
         echo renderPageHead("Registered");
