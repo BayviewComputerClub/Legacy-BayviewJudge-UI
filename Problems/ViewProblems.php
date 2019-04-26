@@ -30,7 +30,7 @@ echo renderPageHead("View Problems");
                         <tr>
                             <td><?php echo $problem['name'] ?></td>
                             <td><?php echo $problem['points'] ?></td>
-                            <td><a href="#" class="btn waves-effect">View Problem</a></td>
+                            <td><a href="SubmitProblem.php?id=<?php echo $problem['id'] ?>" class="btn waves-effect">View Problem</a></td>
                         </tr>
                     <?php
                     }

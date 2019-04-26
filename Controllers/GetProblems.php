@@ -28,5 +28,12 @@ function getProblems() {
     return $problemArray;
 }
 
-//Actual Page
+function getProblemByID($id) {
+    foreach(getProblems() as $problem) {
+        if($problem['id'] == $id) {
+            return $problem;
+        }
+    }
+    return "";
+}
 ?>

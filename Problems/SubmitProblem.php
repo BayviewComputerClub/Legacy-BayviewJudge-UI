@@ -1,0 +1,59 @@
+<?php
+session_start();
+$config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
+include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
+
+include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
+
+$problem = getProblemByID($_GET['id']);
+//TODO account login check
+
+echo renderPageHead("Submit Solution");
+?>
+<div class="card white hoverable">
+    <div class="card-content black-text">
+        <div class="row">
+
+            <h3><?php echo $problem['name'] ?></h3>
+            <hr />
+            <p><?php echo $problem['details'] ?></p>
+            <p>Execution Time Limit: <?php echo $problem['timelimit'] ?>s</p>
+            <p>Memory Limit: <?php echo $problem['memlimit'] ?>MB</p>
+            <hr />
+            <h4>Sample Input</h4>
+            <p><?php echo $problem['sample_in'] ?></p>
+            <h4>Sample Output</h4>
+            <p><?php echo $problem['sample_out'] ?></p>
+
+        </div>
+        <div class="row">
+            <form class="col s12" action="<?php echo $config['page_root'] ?>/Controllers/SubmitProblem.php" method="post">
+
+                <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>" />
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="lang" type="text" class="validate" name="lang">
+                        <label for="lang">Lang</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="code"  class="materialize-textarea" name="code"></textarea>
+
+                        <label for="code">Paste Code Here</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="submit" type="submit" class="waves-effect waves-light btn" value="Submit for grading">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php
+echo renderPageFoot();
+?>
