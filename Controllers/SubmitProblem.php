@@ -66,7 +66,7 @@ function addSubmissionToSQL($result, $points) {
 
     // todo First delete any old submissions.
 
-    $query = "DELETE FROM submissions WHERE user_id=$user_id AND $problem_id=$problem_id";
+    $query = "DELETE FROM submissions WHERE user_id=$user_id AND problem_id=$problem_id";
     $conn->query($query);
 
     $query = "INSERT INTO submissions (user_id, problem_id, result, points) 
