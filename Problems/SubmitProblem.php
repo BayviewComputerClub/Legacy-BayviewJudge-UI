@@ -34,8 +34,11 @@ echo renderPageHead("Submit Solution");
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="lang" type="text" class="validate" name="lang">
-                        <label for="lang">Lang</label>
+                        <select name="lang">
+                            <option value="" disabled selected>Select a language</option>
+                            <option value="c++">C++</option>
+                        </select>
+                        <label>Language</label>
                     </div>
                 </div>
                 <div class="row">
@@ -54,6 +57,12 @@ echo renderPageHead("Submit Solution");
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+</script>
 <?php
 echo renderPageFoot();
 ?>

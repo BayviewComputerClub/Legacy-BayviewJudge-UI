@@ -1,10 +1,24 @@
 <?php
+session_start();
 $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 
+// User must be logged in.
+if(!isset($_SESSION['id'])) {
+    header("Location: ".$config['page_root']);
+    die();
+}
+
 echo renderPageHead("Create Problem - Admin");
 ?>
+
+<script src='https://cloud.tinymce.com/5/tinymce.min.js'></script>
+<script>
+    tinymce.init({
+        selector: '#details'
+    });
+</script>
 
 <div class="card white hoverable">
     <div class="card-content black-text">
@@ -24,8 +38,8 @@ echo renderPageHead("Create Problem - Admin");
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="details"  class="materialize-textarea" name="details"></textarea>
-                        <label for="details">Problem Details</label>
+                        <p>Problem Details</p>
+                        <textarea id="details" name="details"></textarea>
                     </div>
                 </div>
 
@@ -52,29 +66,29 @@ echo renderPageHead("Create Problem - Admin");
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="sample_input" type="number" step="1" class="validate" name="sample_input">
+                        <textarea id="sample_input" class="materialize-textarea" name="sample_input"></textarea>
                         <label for="sample_input">Sample Input</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="sample_output" type="number" step="1" class="validate" name="sample_output">
+                        <textarea id="sample_output" class="materialize-textarea" name="sample_output"></textarea>
                         <label for="sample_output">Sample Output</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="input" type="number" step="1" class="validate" name="input">
+                        <textarea id="input" class="materialize-textarea" name="input"></textarea>
                         <label for="input">Input JSON</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="sample_output" type="number" step="1" class="validate" name="soutput">
-                        <label for="sample_output">Output JSON</label>
+                        <textarea id="output" class="materialize-textarea" name="output"></textarea>
+                        <label for="output">Output JSON</label>
                     </div>
                 </div>
 

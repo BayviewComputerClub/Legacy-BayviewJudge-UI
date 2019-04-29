@@ -4,6 +4,11 @@ $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 
+if(isset($_SESSION['id'])) {
+    header("Location: ".$config['page_root']);
+    die();
+}
+
 echo renderPageHead("Login");
 // Page Contents:
 ?>

@@ -21,8 +21,8 @@ echo renderPageHead("Admin Home");
             <p>Please be careful!</p>
         </div>
         <div class="row">
-            <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Add Problems</a>
-            <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Edit Problems</a>
+            <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/CreateProblem.php"><i class="material-icons left">cloud</i>Add Problem</a>
+            <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/EditProblem.php"><i class="material-icons left">cloud</i>Edit Problems</a>
         </div>
     </div>
 

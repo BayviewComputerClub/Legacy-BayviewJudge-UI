@@ -30,11 +30,12 @@ echo renderPageHead("Home");
         <div class="card-content black-text">
             <span class="card-title">BayviewJudge</span>
             <p>This is an early prototype of what will become the Bayview Computer Club's online competitive programming judging platform.</p>
+            <p>Currently designed for the sole purpose of running BSSPC, and will be expanded to a full fledged judge soon(tm) after.</p>
         </div>
         <div class="card-action">
-            <a href="#">View Problems</a>
-            <a href="#">Leaderboard</a>
-            <a href="#">Register</a>
+            <a href="<?php echo $config['page_root'] ?>/Problems/ViewProblems.php">View Problems</a>
+            <a href="<?php echo $config['page_root'] ?>/Leaderboard">Leaderboard</a>
+            <a href="<?php echo $config['page_root'] ?>/Auth/Register.php">Register</a>
         </div>
     </div>
 

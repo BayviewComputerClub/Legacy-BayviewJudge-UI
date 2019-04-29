@@ -50,6 +50,36 @@ function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output) 
     return $response;
 }
 
+function addSubmissionToSQL($result, $points) {
+    // AC: Accepted, WA: Wrong Answer, TLE: Time Limit Exceeded, CE: Compile Error
+
+    $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
+
+    $conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $user_id = $_SESSION['id'];
+    $problem_id = $_POST['id'];
+
+    // todo First delete any old submissions.
+
+    $query = "DELETE FROM submissions WHERE user_id=$user_id AND $problem_id=$problem_id";
+    $conn->query($query);
+
+    $query = "INSERT INTO submissions (user_id, problem_id, result, points) 
+              VALUES ($user_id, $problem_id, '$result', $points)";
+
+    if ($conn->query($query) === TRUE) {
+        // Don't do anything special.
+    } else {
+        echo "Error: " . $query . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
 
 echo renderPageHead("View Mark");
 ?>
@@ -69,6 +99,8 @@ if(isset($_POST['lang'])) {
     $in_cases = json_decode($problem['in_cases']);
     $out_cases = json_decode($problem['out_cases']);
 
+    $answerAccepted = TRUE;
+
     $length = count($in_cases);
     for($i = 0; $i < $length; $i++) {
         $in = $in_cases[$i];
@@ -76,19 +108,30 @@ if(isset($_POST['lang'])) {
         //echo "Judge: ".$in." - ".$out."\n";
         $response = json_decode(judgeSolution($_POST['id'], $_SESSION['id'], $_POST['code'], $_POST['lang'], $in, $out));
         //var_dump($response);
+
         ?>
-        <strong>Test Case 1:
+        <strong>Test Case <?php echo $i ?>:
         <?php
         if($response->accepted == TRUE) {
             echo "Accepted";
         } else {
-            echo "Wrong Answer";
+            if($response->isCompileError) {
+                echo 'Compile Error';
+                $answerAccepted = FALSE;
+            } else {
+                echo "Wrong Answer";
+                $answerAccepted = FALSE;
+            }
+            break;
         }
         ?>
         </strong><br />
         <?php
     }
-
+    // Write the answer to SQL
+    if($answerAccepted) {
+        addSubmissionToSQL("AC", $problem['points']);
+    }
     //var_dump( $response );
 } else {
     echo 'Invalid request';

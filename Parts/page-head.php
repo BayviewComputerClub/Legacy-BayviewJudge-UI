@@ -32,10 +32,11 @@ function renderPageHead($title) {
     
         <nav>
             <div class="nav-wrapper">
-                <a href="$pageRoot/" class="brand-logo" style="padding-left: 20px">λ:~ Bayview Judge</a>
+                <a href="$pageRoot/" class="brand-logo" style="padding-left: 20px">λ ~/Bayview Judge</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right: 20px">
                     
                     <li><a href="$pageRoot/Problems/ViewProblems.php">View Problems</a></li>
+                    <li><a href="$pageRoot/Leaderboard">Leaderboard</a></li>
                     $authBtns
                     <li><strong>|  $helloMsg</strong></li>
                 </ul>
