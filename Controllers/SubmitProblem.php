@@ -16,7 +16,7 @@ if(!isset($_SESSION['id'])) {
 
 include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 
-function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output) {
+function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output, $timelimit) {
     $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
     // Submission Request Object
     $data = array(
@@ -25,7 +25,8 @@ function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output) 
         'inputCode' => base64_encode($inputCode),
         'lang' => $lang,
         'input' => base64_encode($input),
-        'output' => base64_encode($output)
+        'output' => base64_encode($output),
+        'timelimit' => $timelimit*1000 // Seconds to Milliseconds
     );
 
     $context = stream_context_create(array(
@@ -99,6 +100,8 @@ if(isset($_POST['lang'])) {
     $in_cases = json_decode($problem['in_cases']);
     $out_cases = json_decode($problem['out_cases']);
 
+    $timelimit=$problem['timelimit'];
+
     $answerAccepted = TRUE;
 
     $length = count($in_cases);
@@ -106,7 +109,7 @@ if(isset($_POST['lang'])) {
         $in = $in_cases[$i];
         $out  = $out_cases[$i];
         //echo "Judge: ".$in." - ".$out."\n";
-        $response = json_decode(judgeSolution($_POST['id'], $_SESSION['id'], $_POST['code'], $_POST['lang'], $in, $out));
+        $response = json_decode(judgeSolution($_POST['id'], $_SESSION['id'], $_POST['code'], $_POST['lang'], $in, $out, $timelimit));
         //var_dump($response);
 
         ?>
@@ -118,7 +121,10 @@ if(isset($_POST['lang'])) {
             if($response->isCompileError) {
                 echo 'Compile Error';
                 $answerAccepted = FALSE;
-            } else {
+            } else if($response->isCompileError) {
+                echo 'Time Limit Exceeded';
+                $answerAccepted = FALSE;
+            }else {
                 echo "Wrong Answer";
                 $answerAccepted = FALSE;
             }
