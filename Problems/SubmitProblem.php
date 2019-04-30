@@ -37,6 +37,7 @@ echo renderPageHead("Submit Solution");
                         <select name="lang">
                             <option value="" disabled selected>Select a language</option>
                             <option value="c++">C++</option>
+                            <option value="java">Java</option>
                         </select>
                         <label>Language</label>
                     </div>
