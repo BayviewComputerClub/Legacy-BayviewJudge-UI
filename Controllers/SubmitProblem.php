@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+// Please don't yell at me
+// This causes things like echo to flush the PHP buffer, so for problems with
+// lots of test cases the user can see the "Accepted" come in each test case.
+ob_implicit_flush(true);
+
 // Account for grader hanging
 set_time_limit ( 10 );
 
@@ -116,7 +121,9 @@ if(isset($_POST['lang'])) {
         <strong>Test Case <?php echo $i ?>:
         <?php
         if($response->accepted == TRUE) {
-            echo "Accepted";
+            // The browser/webserver/something needs a minimum of 4k in the buffer before it displays/flushes
+            // even though PHP is flushing the data.
+            echo str_pad("Accepted",4096);;
         } else {
             if($response->isCompileError) {
                 echo 'Compile Error';
