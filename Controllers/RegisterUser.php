@@ -22,7 +22,7 @@ if(isset($_POST['username'])) {
     // Validate username (alphanumeric only)
     if(!preg_match('/^[A-Za-z0-9._-]+$/', $username)) {
         echo renderPageHead("Registered");
-        echo "BayviewJudge - Invalid username, it should be alphanumeric only (dashs and dots allowed).";
+        echo printCard("BayviewJudge - Invalid username, it should be alphanumeric only (dashs and dots allowed).");
         echo renderPageFoot();
         die();
     }
