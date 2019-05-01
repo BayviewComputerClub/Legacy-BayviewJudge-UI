@@ -7,6 +7,9 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 
 echo renderPageHead("View Problems");
+
+// todo: Place a check mark to show if a problem was solved by the user.
+
 // Page Contents:
 ?>
 

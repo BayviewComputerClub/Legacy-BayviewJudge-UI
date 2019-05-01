@@ -14,6 +14,8 @@ echo renderPageHead("About");
             then upload their solution to get it automatically judged for correctness of their solution.
             </p>
             <p>Created by Seshan</p>
+            <hr />
+            <p>The judge is very strict, output must match the output spec exactly.</p>
         </div>
     </div>
 </div>

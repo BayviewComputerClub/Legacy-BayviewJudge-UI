@@ -70,8 +70,7 @@ function addSubmissionToSQL($result, $points) {
     $user_id = $_SESSION['id'];
     $problem_id = $_POST['id'];
 
-    // todo First delete any old submissions.
-
+    // First delete any old submissions.
     $query = "DELETE FROM submissions WHERE user_id=$user_id AND problem_id=$problem_id";
     $conn->query($query);
 

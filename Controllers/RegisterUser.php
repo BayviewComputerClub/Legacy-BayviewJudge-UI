@@ -16,10 +16,19 @@ if(isset($_POST['username'])) {
 
     // POST Data (escaped)
     $username = $conn->real_escape_string($_POST['username']);
+
+    // Validate username (alphanumeric only)
+    if(!preg_match('/^[A-Za-z0-9._-]+$/', $username)) {
+        echo renderPageHead("Registered");
+        echo "BayviewJudge - Invalid username, it should be alphanumeric only (dashs and dots allowed).";
+        echo renderPageFoot();
+        die();
+    }
+
     $email = $conn->real_escape_string($_POST['email']);
     $full_name = $conn->real_escape_string($_POST['full_name']);
     // Hash&Salt the password using bcrypt
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = password_hash($_POST['password'], PASSWORD_ARGON2I);
 
     //TODO check if duplicate username
 

@@ -38,6 +38,7 @@ function renderPageHead($title) {
                     <li><a href="$pageRoot/Problems/ViewProblems.php">View Problems</a></li>
                     <li><a href="$pageRoot/Leaderboard">Leaderboard</a></li>
                     $authBtns
+                    <li><a href="$pageRoot/About.php">About</a></li>
                     <li><strong>|  $helloMsg</strong></li>
                 </ul>
             </div>
