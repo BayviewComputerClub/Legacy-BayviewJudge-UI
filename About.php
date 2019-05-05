@@ -16,6 +16,11 @@ echo renderPageHead("About");
             <p>Created by Seshan</p>
             <hr />
             <p>The judge is very strict, output must match the output spec exactly.</p>
+            <hr />
+            <br />
+            <center><img src="<?php echo $config['page_root'];?>/Assets/banner.jpg" height="120" width="900"/></center>
+            <br />
+            <center><p>Bayview Judge is powered by Mac OS X Server (10.5 Leopard) on a Power Mac G5 (DP 2.0GHz).</p></center>
         </div>
     </div>
 </div>
