@@ -19,6 +19,7 @@ echo renderPageHead("Leaderboard");
                 <tr>
                     <th>Place</th>
                     <th>Name</th>
+                    <th>Problems Solved</th>
                     <th>Points</th>
                 </tr>
                 </thead>
@@ -31,7 +32,8 @@ echo renderPageHead("Leaderboard");
                     ?>
                     <tr>
                         <td><?php echo $index ?></td>
-                        <td><?php echo $user['username'] ?></td>
+                        <td><?php echo $user['full_name'] ?></td>
+                        <td><?php var_dump(getUserSubmissionsByID($user['id']));?></td>
                         <td><?php echo computeScoreByID($user['id']) ?></td>
                     </tr>
                     <?php

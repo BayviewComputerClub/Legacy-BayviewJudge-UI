@@ -6,8 +6,8 @@ session_start();
 // lots of test cases the user can see the "Accepted" come in each test case.
 ob_implicit_flush(true);
 
-// Account for grader hanging
-set_time_limit ( 10 );
+// Deal with grader hanging
+set_time_limit ( 64 );
 
 $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
@@ -56,7 +56,7 @@ function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output, 
     return $response;
 }
 
-function addSubmissionToSQL($result, $points) {
+function addSubmissionToSQL($result, $batch, $points) {
     // AC: Accepted, WA: Wrong Answer, TLE: Time Limit Exceeded, CE: Compile Error
 
     $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
@@ -71,11 +71,11 @@ function addSubmissionToSQL($result, $points) {
     $problem_id = $_POST['id'];
 
     // First delete any old submissions.
-    $query = "DELETE FROM submissions WHERE user_id=$user_id AND problem_id=$problem_id";
+    $query = "DELETE FROM submissions WHERE user_id=$user_id AND problem_id=$problem_id AND batch=$batch";
     $conn->query($query);
 
-    $query = "INSERT INTO submissions (user_id, problem_id, result, points) 
-              VALUES ($user_id, $problem_id, '$result', $points)";
+    $query = "INSERT INTO submissions (user_id, problem_id, batch, result, points) 
+              VALUES ($user_id, $problem_id, $batch, '$result', $points)";
 
     if ($conn->query($query) === TRUE) {
         // Don't do anything special.
@@ -106,45 +106,58 @@ if(isset($_POST['lang'])) {
 
     $timelimit=$problem['timelimit'];
 
-    $answerAccepted = TRUE;
+    //var_dump($in_cases);
 
     $length = count($in_cases);
+    // Batch loop
     for($i = 0; $i < $length; $i++) {
-        $in = $in_cases[$i];
-        $out  = $out_cases[$i];
-        //echo "Judge: ".$in." - ".$out."\n";
-        $response = json_decode(judgeSolution($_POST['id'], $_SESSION['id'], $_POST['code'], $_POST['lang'], $in, $out, $timelimit));
-        //var_dump($response);
+        $answerAccepted = TRUE;
+        $batch_in_cases = $in_cases[$i];
+        $batch_out_cases = $out_cases[$i];
+        $batch_length = count($batch_in_cases);
 
-        ?>
-        <strong>Test Case <?php echo $i ?>:
-        <?php
-        if($response->accepted == TRUE) {
-            // The browser/webserver/something needs a minimum of 4k in the buffer before it displays/flushes
-            // even though PHP is flushing the data.
-            echo str_pad("Accepted",4096);;
-        } else {
-            if($response->isCompileError) {
-                echo 'Compile Error';
-                $answerAccepted = FALSE;
-            } else if($response->isCompileError) {
-                echo 'Time Limit Exceeded';
-                $answerAccepted = FALSE;
-            }else {
-                echo "Wrong Answer";
-                $answerAccepted = FALSE;
-            }
-            break;
+        echo str_pad("Batch $i<hr />", 4096);
+        // Testcase Loop
+        for($x = 0; $x < $batch_length; $x++) {
+            $in = $batch_in_cases[$x];
+            $out  = $batch_out_cases[$x];
+            //echo "Judge: ".$in." - ".$out."\n";
+            $response = json_decode(judgeSolution($_POST['id'], $_SESSION['id'], $_POST['code'], $_POST['lang'], $in, $out, $timelimit));
+            //var_dump($response);
+
+            ?>
+            <strong>Test Case <?php echo $i ?>:
+                <?php
+                if($response->accepted == TRUE) {
+                    // The browser/webserver/something needs a minimum of 4k in the buffer before it displays/flushes
+                    // even though PHP is flushing the data.
+                    echo str_pad("Accepted",4096);
+                } else {
+                    if($response->isCompileError) {
+                        echo 'Compile Error';
+                        $answerAccepted = FALSE;
+                    } else if($response->isCompileError) {
+                        echo 'Time Limit Exceeded';
+                        $answerAccepted = FALSE;
+                    }else {
+                        echo "Wrong Answer";
+                        $answerAccepted = FALSE;
+                    }
+                    break;
+                }
+                ?>
+            </strong><br />
+            <?php
         }
-        ?>
-        </strong><br />
-        <?php
+        echo "<br />";
+        // Write the answer to SQL
+        if($answerAccepted) {
+            addSubmissionToSQL("AC", $i, $problem['points']);
+        }
     }
-    // Write the answer to SQL
-    if($answerAccepted) {
-        addSubmissionToSQL("AC", $problem['points']);
-    }
+
     //var_dump( $response );
+
 } else {
     echo 'Invalid request';
 }

@@ -85,4 +85,25 @@ function computeScoreByID($id) {
     return $points;
 }
 
+function getUserSubmissionsByID($id) {
+    $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
+    // Create connection object
+    $conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $query = "SELECT * FROM submissions WHERE user_id=$id";
+    $result = $conn->query($query);
+
+    $problems=array();
+    while ($row = $result->fetch_assoc()) {
+        array_push($problems,$row['problem_id']);
+    }
+
+
+    return $problems;
+}
+
 ?>

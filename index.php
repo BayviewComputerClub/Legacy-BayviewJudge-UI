@@ -28,7 +28,8 @@ echo renderPageHead("Home");
 
     <div class="card white hoverable">
         <div class="card-content black-text">
-            <span class="card-title">BayviewJudge</span>
+            <span class="card-title"></span>
+            <img src="<?php echo $config['page_root']; ?>/Assets/logo-white.png" width="50%" />
             <p>This is an early prototype of what will become the Bayview Computer Club's online competitive programming judging platform.</p>
             <p>Currently designed for the sole purpose of running BSSPC, and will be expanded to a full fledged judge soon(tm) after.</p>
         </div>
