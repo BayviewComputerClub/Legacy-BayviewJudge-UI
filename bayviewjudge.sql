@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 26, 2019 at 11:20 AM
--- Server version: 10.1.38-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.2.17-0ubuntu0.18.04.1
+-- Host: localhost
+-- Generation Time: May 05, 2019 at 05:01 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `problems` (
   `id` int(11) NOT NULL,
-  `name` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `details` text COLLATE utf8_unicode_ci NOT NULL,
   `points` int(11) NOT NULL,
   `timelimit` int(11) NOT NULL,
@@ -44,7 +46,29 @@ CREATE TABLE `problems` (
 --
 
 INSERT INTO `problems` (`id`, `name`, `details`, `points`, `timelimit`, `memlimit`, `sample_in`, `sample_out`, `in_cases`, `out_cases`) VALUES
-(1, 'A Plus B', 'Add two numbers and then output the result.', 2, 2, 16, '1 2', '3', '[\"0 2\", \"1 3\"]', '[\"2\", \"4\"]');
+(1, 'A Plus B', '<p>Add two <em>numbers <strong>and boom <span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">you win</span></span></strong></em></p>\r\n<p><em><strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">And we can </span></span></strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">edit</span></span></em><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">&nbsp; <span style=\"text-decoration: line-through;\">i think?</span><br /></span></span></p>', 2, 24, 64, '1 2', '3', '[\"1 2\", \"4 5\"]', '[\"3\", \"9\"]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `submissions`
+--
+
+CREATE TABLE `submissions` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `problem_id` int(11) NOT NULL,
+  `result` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `points` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `submissions`
+--
+
+INSERT INTO `submissions` (`id`, `user_id`, `problem_id`, `result`, `points`) VALUES
+(1, 3, 1, 'AC', 2),
+(5, 1, 1, 'AC', 2);
 
 -- --------------------------------------------------------
 
@@ -54,24 +78,26 @@ INSERT INTO `problems` (`id`, `name`, `details`, `points`, `timelimit`, `memlimi
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `points` int(11) NOT NULL,
   `full_name` text COLLATE utf8_unicode_ci NOT NULL,
   `school` text COLLATE utf8_unicode_ci NOT NULL,
-  `profile_desc` text COLLATE utf8_unicode_ci NOT NULL
+  `profile_desc` text COLLATE utf8_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `points`, `full_name`, `school`, `profile_desc`) VALUES
-(1, 'seshpenguin1', '123', 'seshan10@me.com', 100, 'Hey', 'Place', 'Woop de dang do'),
-(2, 'John', 'Doe', 'john@example.com', 0, 'hi', 'hi2', 'hi'),
-(3, '', '$2y$10$WAmiHWp/P/95Qxvp7ixjLebdIBqHf315U7P4lc/zKLv1b1kcXFIye', 'john@example.com', 0, 'hi', 'hi2', 'hi'),
-(4, 'test', '$2y$10$bi5s7nGckpL1kDbZGxkKqe0vnOmhOm2Uv2iQlTPozllCB87MwSD96', 'seshan10@me.com', 0, 'Test User', 'Bayview Secondary School', 'Default User');
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `points`, `full_name`, `school`, `profile_desc`, `role`) VALUES
+(1, 'seshpenguin', '$2y$10$ZxtfqtoIJ8RK0jf08.w4S.n1ht/iL9PW.0YJkJeHD1l72MvJC/Sbq', 'seshan10@me.com', 2, 'Seshan Ravikumar', 'Bayview SS', '', 1),
+(3, 'test', '$2y$10$bdvR6bHHfetnMaTGjSws..1p4CrrTNnkPb.a1QBwAn559pH0QmeqC', 'test@test.net', 2, 'Test McTestFace', 'Pixl North Secondary', '', 0),
+(6, 'test2', '$2y$10$yeTwSPcRROkHbY/fsxFt..aWoIIcwDK2kYh.0cJ5zY8llbzc/oGai', 'test@test.nett', 0, 's', 's', '', 0),
+(7, 'Raymo111', '$2y$10$fgw2tPpjvFv48dp6hb5Wr.KsnHXXQ3WJnOoYrhT/ng6QX1.FByOLy', 'hi@raymond.tk', 0, 'Raymond Li', 'Bayview SS', '', 1),
+(10, 'test2', '$2y$10$idcypdc2Snq.S5.6CJ00COEoxJ0R7ZazZTAMaMfma18QseSTkBKju', 'seshan10@me.com', 2, 'This Name', 'Bayview Secondary School', 'Default User', 0);
 
 --
 -- Indexes for dumped tables
@@ -81,6 +107,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `points`, `full_name
 -- Indexes for table `problems`
 --
 ALTER TABLE `problems`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `submissions`
+--
+ALTER TABLE `submissions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -98,11 +130,20 @@ ALTER TABLE `users`
 --
 ALTER TABLE `problems`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `submissions`
+--
+ALTER TABLE `submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
