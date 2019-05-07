@@ -104,6 +104,9 @@ if(isset($_POST['lang'])) {
     $in_cases = json_decode($problem['in_cases']);
     $out_cases = json_decode($problem['out_cases']);
 
+    var_dump($in_cases);
+    die();
+
     $timelimit=$problem['timelimit'];
 
     //var_dump($in_cases);

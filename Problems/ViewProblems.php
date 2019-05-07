@@ -8,6 +8,8 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 
 echo renderPageHead("View Problems");
 
+
+
 // todo: Place a check mark to show if a problem was solved by the user.
 
 // Page Contents:
@@ -29,39 +31,42 @@ echo renderPageHead("View Problems");
 
                     <tbody>
                     <?php
-                    $problems = getProblems();
-                    foreach($problems as $problem) {
+                    if(!isset($_SESSION['username'])) {
+                        echo "You must be logged in to view the problems.";
+                    } else {
+                        $problems = getProblems();
+                        foreach($problems as $problem) {
 
-                        $problemID = $problem['id'];
-                        $userID = $_SESSION['id'];
+                            $problemID = $problem['id'];
+                            $userID = $_SESSION['id'];
 
-                        // Check if the user has an accepted solution.
-                        $conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
+                            // Check if the user has an accepted solution.
+                            $conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+                            // Check connection
+                            if ($conn->connect_error) {
+                                die("Connection failed: " . $conn->connect_error);
+                            }
 
-                        $query = "SELECT COUNT(*) AS total FROM submissions WHERE problem_id=$problemID AND user_id=$userID";
-                        $result = $conn->query($query)->fetch_assoc();
+                            $query = "SELECT COUNT(*) AS total FROM submissions WHERE problem_id=$problemID AND user_id=$userID";
+                            $result = $conn->query($query)->fetch_assoc();
 
                         $isDoneEmoji = "❌";
 
-                        if($result > 0) {
-                            $isDoneEmoji = "✅";
+                            if($result > 0) {
+                                $isDoneEmoji = "✅";
+                            }
+                            ?>
+                            <tr>
+                                <td><?php echo $problem['name'] ?></td>
+                                <td><?php echo $problem['points'] ?></td>
+                                <td><a href="SubmitProblem.php?id=<?php echo $problem['id'] ?>" class="btn waves-effect">View Problem</a></td>
+                                <td><?php echo $isDoneEmoji ?></td>
+                            </tr>
+                            <?php
                         }
-                    ?>
-                        <tr>
-                            <td><?php echo $problem['name'] ?></td>
-                            <td><?php echo $problem['points'] ?></td>
-                            <td><a href="SubmitProblem.php?id=<?php echo $problem['id'] ?>" class="btn waves-effect">View Problem</a></td>
-                            <td><?php echo $isDoneEmoji ?></td>
-                        </tr>
-                    <?php
+
                     }
                     ?>
-
-
                     </tbody>
                 </table>
             </div>
