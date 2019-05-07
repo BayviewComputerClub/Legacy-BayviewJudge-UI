@@ -104,9 +104,6 @@ if(isset($_POST['lang'])) {
     $in_cases = json_decode($problem['in_cases']);
     $out_cases = json_decode($problem['out_cases']);
 
-    var_dump($in_cases);
-    die();
-
     $timelimit=$problem['timelimit'];
 
     //var_dump($in_cases);
@@ -115,11 +112,12 @@ if(isset($_POST['lang'])) {
     // Batch loop
     for($i = 0; $i < $length; $i++) {
         $answerAccepted = TRUE;
-        $batch_in_cases = $in_cases[$i];
-        $batch_out_cases = $out_cases[$i];
+        $batch_in_cases = $in_cases[$i]->cases;
+        $batch_out_cases = $out_cases[$i]->cases;
         $batch_length = count($batch_in_cases);
 
-        echo str_pad("Batch $i<hr />", 4096);
+        $batchnum = $i + 1;
+        echo str_pad("Batch $batchnum<hr />", 4096);
         // Testcase Loop
         for($x = 0; $x < $batch_length; $x++) {
             $in = $batch_in_cases[$x];
@@ -129,7 +127,7 @@ if(isset($_POST['lang'])) {
             //var_dump($response);
 
             ?>
-            <strong>Test Case <?php echo $i ?>:
+            <strong>Test Case <?php echo $x+1 ?>:
                 <?php
                 if($response->accepted == TRUE) {
                     // The browser/webserver/something needs a minimum of 4k in the buffer before it displays/flushes
@@ -155,7 +153,7 @@ if(isset($_POST['lang'])) {
         echo "<br />";
         // Write the answer to SQL
         if($answerAccepted) {
-            addSubmissionToSQL("AC", $i, $problem['points']);
+            addSubmissionToSQL("AC", $i, $out_cases[$i]->points);
         }
     }
 
