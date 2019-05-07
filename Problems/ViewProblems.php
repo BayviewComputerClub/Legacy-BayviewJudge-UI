@@ -50,7 +50,7 @@ echo renderPageHead("View Problems");
                             $query = "SELECT COUNT(*) AS total FROM submissions WHERE problem_id=$problemID AND user_id=$userID";
                             $result = $conn->query($query)->fetch_assoc();
 
-                        $isDoneEmoji = "❌";
+                            $isDoneEmoji = "❌";
 
                             if($result > 0) {
                                 $isDoneEmoji = "✅";
