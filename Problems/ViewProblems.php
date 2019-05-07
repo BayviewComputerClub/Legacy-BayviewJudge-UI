@@ -51,7 +51,7 @@ echo renderPageHead("View Problems");
                             $result = $conn->query($query)->fetch_assoc();
 
                             $isDoneEmoji = "❌";
-
+                            
                             if($result > 0) {
                                 $isDoneEmoji = "✅";
                             }
