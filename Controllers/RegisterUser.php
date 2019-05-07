@@ -30,7 +30,7 @@ if(isset($_POST['username'])) {
     $email = $conn->real_escape_string($_POST['email']);
     $full_name = $conn->real_escape_string($_POST['full_name']);
     // Hash&Salt the password using bcrypt
-    $password = password_hash($_POST['password'], PASSWORD_ARGON2I);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     //TODO check if duplicate username
 
