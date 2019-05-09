@@ -17,7 +17,7 @@ echo renderPageHead("Leaderboard");
             <table>
                 <thead>
                 <tr>
-                    <th>Place</th>
+                    <th>Rank</th>
                     <th>Name</th>
                     <th>Problems Solved</th>
                     <th>Points</th>
