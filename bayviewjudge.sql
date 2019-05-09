@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 05, 2019 at 05:01 PM
+-- Generation Time: May 08, 2019 at 01:16 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.27
 
@@ -46,7 +46,7 @@ CREATE TABLE `problems` (
 --
 
 INSERT INTO `problems` (`id`, `name`, `details`, `points`, `timelimit`, `memlimit`, `sample_in`, `sample_out`, `in_cases`, `out_cases`) VALUES
-(1, 'A Plus B', '<p>Add two <em>numbers <strong>and boom <span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">you win</span></span></strong></em></p>\r\n<p><em><strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">And we can </span></span></strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">edit</span></span></em><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">&nbsp; <span style=\"text-decoration: line-through;\">i think?</span><br /></span></span></p>', 2, 24, 64, '1 2', '3', '[\"1 2\", \"4 5\"]', '[\"3\", \"9\"]');
+(1, 'A Plus B', '<p>Add two <em>numbers <strong>and boom <span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">you win</span></span></strong></em></p>\r\n<p><em><strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">And we can </span></span></strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">edit</span></span></em><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">&nbsp; <span style=\"text-decoration: line-through;\">i think?</span><br /></span></span></p>', 2, 24, 64, '1 2', '3', '[ {\"cases\": [\"1 2\", \"4 5\"], \"points\": 5 }, {\"cases\": [\"7 5\"], \"points\": 5} ]', '[ { \"cases\": [\"3\", \"9\"], \"points\": 5 }, {\"cases\": [\"12\"], \"points\": 5 } ]');
 
 -- --------------------------------------------------------
 
@@ -58,6 +58,7 @@ CREATE TABLE `submissions` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `problem_id` int(11) NOT NULL,
+  `batch` int(11) NOT NULL,
   `result` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `points` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -66,9 +67,10 @@ CREATE TABLE `submissions` (
 -- Dumping data for table `submissions`
 --
 
-INSERT INTO `submissions` (`id`, `user_id`, `problem_id`, `result`, `points`) VALUES
-(1, 3, 1, 'AC', 2),
-(5, 1, 1, 'AC', 2);
+INSERT INTO `submissions` (`id`, `user_id`, `problem_id`, `batch`, `result`, `points`) VALUES
+(1, 3, 1, 0, 'AC', 2),
+(41, 1, 1, 0, 'AC', 5),
+(42, 1, 1, 1, 'AC', 5);
 
 -- --------------------------------------------------------
 
@@ -93,7 +95,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `points`, `full_name`, `school`, `profile_desc`, `role`) VALUES
-(1, 'seshpenguin', '$2y$10$ZxtfqtoIJ8RK0jf08.w4S.n1ht/iL9PW.0YJkJeHD1l72MvJC/Sbq', 'seshan10@me.com', 2, 'Seshan Ravikumar', 'Bayview SS', '', 1),
+(1, 'seshpenguin', '$2y$10$ZxtfqtoIJ8RK0jf08.w4S.n1ht/iL9PW.0YJkJeHD1l72MvJC/Sbq', 'seshan10@me.com', 10, 'Seshan Ravikumar', 'Bayview SS', '', 1),
 (3, 'test', '$2y$10$bdvR6bHHfetnMaTGjSws..1p4CrrTNnkPb.a1QBwAn559pH0QmeqC', 'test@test.net', 2, 'Test McTestFace', 'Pixl North Secondary', '', 0),
 (6, 'test2', '$2y$10$yeTwSPcRROkHbY/fsxFt..aWoIIcwDK2kYh.0cJ5zY8llbzc/oGai', 'test@test.nett', 0, 's', 's', '', 0),
 (7, 'Raymo111', '$2y$10$fgw2tPpjvFv48dp6hb5Wr.KsnHXXQ3WJnOoYrhT/ng6QX1.FByOLy', 'hi@raymond.tk', 0, 'Raymond Li', 'Bayview SS', '', 1),
@@ -135,7 +137,7 @@ ALTER TABLE `problems`
 -- AUTO_INCREMENT for table `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `users`

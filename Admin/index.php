@@ -23,6 +23,8 @@ echo renderPageHead("Admin Home");
         <div class="row">
             <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/CreateProblem.php"><i class="material-icons left">cloud</i>Add Problem</a>
             <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/EditProblem.php"><i class="material-icons left">cloud</i>Edit Problems</a>
+            <hr />
+            <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/SiteOptions.php"><i class="material-icons left">cloud</i>Site Options</a>
         </div>
     </div>
 

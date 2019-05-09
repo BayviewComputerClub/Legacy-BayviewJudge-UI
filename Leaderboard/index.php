@@ -5,6 +5,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetUser.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/Util/SiteMetadata.php");
 
 echo renderPageHead("Leaderboard");
 // Page Contents:
@@ -33,7 +34,12 @@ echo renderPageHead("Leaderboard");
                     <tr>
                         <td><?php echo $index ?></td>
                         <td><?php echo $user['full_name'] ?></td>
-                        <td><?php var_dump(getUserSubmissionsByID($user['id']));?></td>
+                        <td><?php
+                            $submissions = getUserSubmissionsByID($user['id']);
+                            foreach($submissions as $submission) {
+                                echo $submission.", ";
+                            }
+                        ?></td>
                         <td><?php echo computeScoreByID($user['id']) ?></td>
                     </tr>
                     <?php

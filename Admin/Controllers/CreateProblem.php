@@ -3,6 +3,7 @@ session_start();
 $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/Parts/Helpers.php");
 
 // User must be logged in.
 if(!isset($_SESSION['id'])) {
@@ -36,7 +37,7 @@ if(isset($_POST['name'])) {
 
     if ($conn->query($query) === TRUE) {
         echo renderPageHead("Add Problem - Done -");
-        echo "BayviewJudge - The problem has been added.";
+        echo printCard("BayviewJudge - The problem has been added.");
         ?>
         <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/index.php"><i class="material-icons left">cloud</i>Admin Home</a>
         <?php
