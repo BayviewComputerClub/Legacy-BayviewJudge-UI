@@ -18,7 +18,7 @@ This example has 2 batches, with 2 test cases in the first batch and one in the 
 
 The corresponding output cases would look as such:
 ```json
-[ { "cases": ["3", "9"], "points": 5 }, { "cases": ["12"], "points": 5 } ]
+[ { "cases": ["3", "9"] }, { "cases": ["12"] } ]
 ```
 
 **Before adding a problem to the judge, make sure your input and output cases are valid JSON!**

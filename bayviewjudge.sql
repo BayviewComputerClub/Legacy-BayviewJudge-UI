@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 08, 2019 at 01:16 AM
+-- Generation Time: May 09, 2019 at 06:43 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.27
 
@@ -47,6 +47,24 @@ CREATE TABLE `problems` (
 
 INSERT INTO `problems` (`id`, `name`, `details`, `points`, `timelimit`, `memlimit`, `sample_in`, `sample_out`, `in_cases`, `out_cases`) VALUES
 (1, 'A Plus B', '<p>Add two <em>numbers <strong>and boom <span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">you win</span></span></strong></em></p>\r\n<p><em><strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">And we can </span></span></strong><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">edit</span></span></em><span style=\"text-decoration: underline;\"><span style=\"font-family: impact, sans-serif;\">&nbsp; <span style=\"text-decoration: line-through;\">i think?</span><br /></span></span></p>', 2, 24, 64, '1 2', '3', '[ {\"cases\": [\"1 2\", \"4 5\"], \"points\": 5 }, {\"cases\": [\"7 5\"], \"points\": 5} ]', '[ { \"cases\": [\"3\", \"9\"], \"points\": 5 }, {\"cases\": [\"12\"], \"points\": 5 } ]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `site_meta`
+--
+
+CREATE TABLE `site_meta` (
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `site_meta`
+--
+
+INSERT INTO `site_meta` (`name`, `content`) VALUES
+('home_text', '<p><img src=\"../Assets/logo-white.png\" width=\"50%\" /></p>\r\n<p>This is an early prototype of what will become the Bayview Computer Club\'s online competitive programming judging platform.</p>\r\n<p>Currently designed for the sole purpose of running BSSPC, and will be expanded to a full fledged judge soon(tm) after.</p>\r\n<p><strong>The judge is under heavy development! Devin sucks<br /></strong></p>');
 
 -- --------------------------------------------------------
 
@@ -110,6 +128,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `points`, `full_name
 --
 ALTER TABLE `problems`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `site_meta`
+--
+ALTER TABLE `site_meta`
+  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `submissions`

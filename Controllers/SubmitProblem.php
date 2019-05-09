@@ -156,6 +156,7 @@ if(isset($_POST['lang'])) {
             addSubmissionToSQL("AC", $i, $out_cases[$i]->points);
         }
     }
+    echo "<strong>Execution Complete.</strong>";
 
     //var_dump( $response );
 
