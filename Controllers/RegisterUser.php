@@ -32,7 +32,16 @@ if(isset($_POST['username'])) {
     // Hash&Salt the password using bcrypt
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-    //TODO check if duplicate username
+    //check if duplicate username
+    $query = "SELECT * FROM users WHERE username='$username'";
+    $result= $conn->query($query)->fetch_assoc();
+    //var_dump($result);
+    if($result !== NULL) {
+        echo renderPageHead("Error");
+        echo printCard("BayviewJudge - Duplicate Username.");
+        echo renderPageFoot();
+        die();
+    }
 
     $query = "INSERT INTO users (username, password, email, points, full_name, school, profile_desc) VALUES ('$username', '$password', '$email', 0, '$full_name', 'Bayview Secondary School', 'Default User')";
 
