@@ -1,4 +1,9 @@
 <?php
+//debug
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
@@ -7,40 +12,57 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Util/SiteMetadata.php");
 
 // User must be logged in.
+/*
 if(!isset($_SESSION['id'])) {
     header("Location: ".$config['page_root']);
     die();
-}
+}*/
 
+if(isset($_POST['upload'])) {
+    $total = count($_FILES['upload']['name']);
 
-echo renderPageHead("Site Options - Admin");
-?>
-<div class="card white hoverable">
-    <div class="card-content black-text">
-        <div class="row">
-            <h4>Generate testcase JSON</h4>
-            <p></p>
-        </div>
-        <div class="row">
-            <form class="col s12" action="<?php echo $config['page_root'] ?>/Admin/Controllers/SiteOptionsController.php" method="post">
+    for( $i=0 ; $i < $total ; $i++ ) {
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <p><strong>Homepage Text</strong></p>
-                        <textarea id="home_text" name="home_text"><?php echo getMetaValue("home_text"); ?></textarea>
+        //Get the temp file path
+        $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+
+        if ($tmpFilePath != ""){
+            echo "Path: $tmpFilePath";
+        }
+    }
+} else {
+
+    echo renderPageHead("Site Options - Admin");
+    ?>
+    <div class="card white hoverable">
+        <div class="card-content black-text">
+            <div class="row">
+                <h4>Generate testcase JSON</h4>
+                <p></p>
+            </div>
+            <div class="row">
+                <form class="col s12"
+                      action="<?php echo $config['page_root'] ?>/Admin/GenerateCases.php"
+                      method="post">
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <p><strong>Input Cases (Multi File Upload)</strong></p>
+                            <input name="upload[]" type="file" multiple="multiple"/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="submit" type="submit" class="waves-effect waves-light btn" value="Save">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="submit" type="submit" class="waves-effect waves-light btn" value="Save">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<script></script>
-<?php
-echo renderPageFoot();
+    <script></script>
+    <?php
+    echo renderPageFoot();
+}
 ?>
