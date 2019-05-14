@@ -86,7 +86,7 @@ function addSubmissionToSQL($result, $batch, $points) {
     $conn->close();
 }
 
-echo renderPageHead("View Mark");
+echo renderPageHead("View Score");
 ?>
 <div class="card white hoverable">
 <div class="card-content black-text">
