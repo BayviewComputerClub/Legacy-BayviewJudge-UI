@@ -13,6 +13,21 @@ if(!isset($_SESSION['id'])) {
 }
 
 
+if(isset($_POST['submit'])) {
+    // Count total files
+    $countfiles = count($_FILES['file']['name']);
+
+    // Looping all files
+    for ($i = 0; $i < $countfiles; $i++) {
+        $filename = $_FILES['file']['name'][$i];
+
+        // Upload file
+        echo $filename;
+
+    }
+}else {
+
+
 echo renderPageHead("Site Options - Admin");
 ?>
 <div class="card white hoverable">
@@ -26,8 +41,8 @@ echo renderPageHead("Site Options - Admin");
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <p><strong>Homepage Text</strong></p>
-                        <textarea id="home_text" name="home_text"><?php echo getMetaValue("home_text"); ?></textarea>
+                        <p><strong>Input Cases (Multiple Files Upload)</strong></p>
+                        <input type="file" name="file[]" id="file" multiple>
                     </div>
                 </div>
 
@@ -43,4 +58,5 @@ echo renderPageHead("Site Options - Admin");
 <script></script>
 <?php
 echo renderPageFoot();
+}
 ?>

@@ -56,7 +56,7 @@ function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output, 
     return $response;
 }
 
-function addSubmissionToSQL($result, $batch, $points) {
+function addSubmissionToSQL($result, $batch, $points, $source) {
     // AC: Accepted, WA: Wrong Answer, TLE: Time Limit Exceeded, CE: Compile Error
 
     $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
@@ -82,6 +82,12 @@ function addSubmissionToSQL($result, $batch, $points) {
     } else {
         echo "Error: " . $query . "<br>" . $conn->error;
     }
+
+    // Add to the submission vault. todo
+    //$source_base64 = base64_encode($source);
+    //$query = "INSERT INTO submissions_vault (user_id, problem_id, batch, result, points, source, runtime, submit_time)
+    //          VALUES ($user_id, $problem_id, $batch, '$result', $points, '$source_base64', 0)";
+    //$conn->query($query);
 
     $conn->close();
 }
@@ -153,7 +159,7 @@ if(isset($_POST['lang'])) {
         echo "<br />";
         // Write the answer to SQL
         if($answerAccepted) {
-            addSubmissionToSQL("AC", $i, $out_cases[$i]->points);
+            addSubmissionToSQL("AC", $i, $out_cases[$i]->points, $_POST['code']);
         }
     }
     echo "<strong>Execution Complete.</strong>";
