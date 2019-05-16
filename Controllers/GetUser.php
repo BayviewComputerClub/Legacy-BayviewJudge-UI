@@ -99,7 +99,7 @@ function getUserSubmissionsByID($id) {
 
     $problems=array();
     while ($row = $result->fetch_assoc()) {
-        array_push($problems,$row['problem_id']);
+        array_push($problems,$row);
     }
 
 
