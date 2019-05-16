@@ -24,12 +24,23 @@ function renderPageHead($title) {
     
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            body {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+            }
+            
+            main {
+                flex: 1 0 auto;
+            }
+        </style>
         
         <title>$title - BayviewJudge</title>
     </head>
     
     <body>
-    
+        
         <nav>
             <div class="nav-wrapper">
                 <a href="$pageRoot/" class="brand-logo" style="padding-left: 20px">λ ~/Bayview Judge</a>
@@ -43,7 +54,8 @@ function renderPageHead($title) {
                 </ul>
             </div>
         </nav>
-        <div class="container">
+        <main>
+            <div class="container">
 HTML;
 
 }

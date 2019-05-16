@@ -36,8 +36,9 @@ echo renderPageHead("Leaderboard");
                         <td><?php echo $user['full_name'] ?></td>
                         <td><?php
                             $submissions = getUserSubmissionsByID($user['id']);
+                            $solvedProblems = array();
                             foreach($submissions as $submission) {
-                                echo $submission.", ";
+                                echo "Problem ".$submission['problem_id']."-".$submission['batch'].", ";
                             }
                         ?></td>
                         <td><?php echo computeScoreByID($user['id']) ?></td>
