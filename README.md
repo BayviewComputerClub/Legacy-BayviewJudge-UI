@@ -20,8 +20,8 @@ The judge is only tested to work in production on Ubuntu GNU/Linux and XAMPP on 
 4. On the lefthand side under `modules` in the Control Panel, you should see `Service`. Click the :x: and wait for it to change to a :heavy_check_mark:.
 5. Go to :wrench:`Config` at the top right of the Control Panel, `User Defined Files` at the bottom left of the popu dialog and then `MySQL`. Under the `Config` box, put `\htdocs\bayviewjudge.sql`. :heavy_check_mark:`Save` twice. If you've done something wrong, :x:`Abort`.
 6. Now under `Actions` in the main XAMPP Control Panel, click `Start` for both `Apache` and `MySQL`.
-7. Go to [localhost/] in your browser to see the site. There will be a bunch of errors.
-8. Go to [localhost/phpmyadmin/]. Create a new database called `bayviewjudge`, with charset `UTF-8 (general)`.
+7. Go to [localhost] in your browser to see the site. There will be a bunch of errors.
+8. Go to [localhost/phpmyadmin]. Create a new database called `bayviewjudge`, with charset `UTF-8 (general)`.
 9. Import `bayviewjudge.sql` (from `C:\xampp\htdocs`) into the newly created database. Refresh [localhost/] to see the site.
 
 ## Creating Testcases
