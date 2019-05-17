@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Restricted Files"
+AuthUserFile /home/bssexec/.htpasswd
+Require valid-user
