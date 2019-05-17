@@ -6,12 +6,19 @@ Don't forget to have a [grader server][1] too!
 
 In order to run the UI, you must have Apache, MySQL/MariaDB, and PHP 7.x installed. Place these files in the html root directory. There is a supplied SQL file you can import into the database. Make to set the correct values in "Config/config.ini".
 
-The judge is only tested to work in production on Ubuntu GNU/Linux and XAMPP on Windows. The site will most likely not work correctly on other operating systems without modification.
+In production the Judge UI runs on Ubuntu 18.04 with Apache, PHP 7.2, and MySQL. It has been tested to work on both Mac OS X and Windows, and will probably run wherever there is 
+a reasonably modern version of PHP (>5.6 or something like that).
 
 ## Installation Instructions
 
-### Linux/WSL
-###### TODO
+### Ubuntu GNU/Linux
+1. With a fresh Ubuntu Server installation, setup a LAMP stack as per [this guide][4].
+2. Optionally [install PHPMyAdmin][5] to make database setup easier.
+3. Clone this repository somewhere (like home), and then copy the files to /var/www/html
+4. Create a new database on MySQL and import the bayviewjudge.sql file.
+5. Edit the Config/config.ini file with your MySQL and Webserver information.
+
+There is a `deploy_gnulinux.sh` script which will automatically git pull, copy the files to /var/www/html, and copy a config.ini from from ~/config.ini
 
 ### Windows
 1. Download [XAMPP][2] and run the installer. Keep the default installation directories. You only need the Apache, MySql and PHP elements.
@@ -45,3 +52,5 @@ The corresponding output cases would look as such:
 [1]: https://github.com/BayviewComputerClub/BayviewJudge-Grader
 [2]: https://www.apachefriends.org/download.html
 [3]: https://github.com/BayviewComputerClub/BayviewJudge-UI/archive/master.zip
+[4]: https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04
+[5]: https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04
