@@ -20,6 +20,8 @@ a reasonably modern version of PHP (>5.6 or something like that).
 
 There is a `deploy_gnulinux.sh` script which will automatically git pull, copy the files to /var/www/html, and copy a config.ini from from ~/config.ini
 
+Don't forget to `AllowOverride All` in the Apache config.
+
 ### Windows
 1. Download [XAMPP][2] and run the installer. Keep the default installation directories. You only need the Apache, MySql and PHP elements.
 2. Download [this repository][3] and unzip it into `C:\xampp\htdocs`.

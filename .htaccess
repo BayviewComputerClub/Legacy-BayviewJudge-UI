@@ -1,4 +1,4 @@
 # BayviewJudge .htaccess file
 
 # The preflight file must exist in this folder (Apache dir on Ubuntu)
-php_value auto_prepend_file "./Util/PreFlight.php"
+php_value auto_prepend_file "/var/www/html/Util/PreFlight.php"
