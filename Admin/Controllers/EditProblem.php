@@ -28,8 +28,8 @@ if(isset($_POST['name'])) {
     $memlimit = $conn->real_escape_string($_POST['memlimit']);
     $sample_input = $conn->real_escape_string($_POST['sample_input']);
     $sample_output = $conn->real_escape_string($_POST['sample_output']);
-    $input = $conn->real_escape_string($_POST['input']);
-    $output = $conn->real_escape_string($_POST['output']);
+    $input = $conn->real_escape_string("{}");
+    $output = $conn->real_escape_string("{}");
 
     $query = "UPDATE problems SET 
                     name='$name', 
@@ -45,7 +45,7 @@ if(isset($_POST['name'])) {
 
     if ($conn->query($query) === TRUE) {
         echo renderPageHead("Edit Problem - Done -");
-        echo printCard("BayviewJudge - The problem has been edited.");
+        echo printCard("BayviewJudge - The problem has been edited. NOTE: Now you must upload the testcase ZIP.");
         ?>
         <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/index.php"><i class="material-icons left">cloud</i>Admin Home</a>
         <?php
