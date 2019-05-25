@@ -47,7 +47,7 @@ if(isset($_POST['name'])) {
 
     if ($conn->query($query) === TRUE) {
         echo renderPageHead("Add Problem - Done -");
-        echo printCard("BayviewJudge - The problem has been added.");
+        echo printCard("BayviewJudge - The problem has been added. <br />NOTE: Now you must upload the testcase ZIP.");
         ?>
         <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/index.php"><i class="material-icons left">cloud</i>Admin Home</a>
         <?php

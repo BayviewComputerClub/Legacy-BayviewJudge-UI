@@ -31,7 +31,7 @@ echo renderPageHead("Create Problem - Admin");
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <p>Problem Details</p>
+                        <p>Problem Details PDF</p>
                         <input type="file" name="details" id="details">
                     </div>
                 </div>

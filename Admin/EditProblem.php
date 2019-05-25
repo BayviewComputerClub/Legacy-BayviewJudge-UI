@@ -13,12 +13,6 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 echo renderPageHead("Edit Problems - Admin -");
 ?>
 
-<script src='https://cloud.tinymce.com/5/tinymce.min.js'></script>
-<script>
-    tinymce.init({
-        selector: '#details'
-    });
-</script>
 
 <div class="card white hoverable">
     <div class="card-content black-text">
@@ -62,7 +56,7 @@ echo renderPageHead("Edit Problems - Admin -");
             <div class="row">
                 <hr />
                 <h5>Edit problem</h5>
-                <form class="col s12" action="<?php echo $config['page_root'] ?>/Admin/Controllers/EditProblem.php" method="post">
+                <form enctype="multipart/form-data" class="col s12" action="<?php echo $config['page_root'] ?>/Admin/Controllers/EditProblem.php" method="post">
 
                     <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>" />
 
@@ -75,8 +69,8 @@ echo renderPageHead("Edit Problems - Admin -");
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <p>Problem Details</p>
-                            <textarea id="details" name="details"><?php echo $problem['details'] ?></textarea>
+                            <p>Problem Details PDF</p>
+                            <input type="file" name="details" id="details">
                         </div>
                     </div>
 

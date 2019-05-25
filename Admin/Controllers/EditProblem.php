@@ -22,15 +22,29 @@ if(isset($_POST['name'])) {
     // Grab everything from POST
     $id = $conn->real_escape_string($_POST['id']);
     $name = $conn->real_escape_string($_POST['name']);
-    $details = $conn->real_escape_string($_POST['details']);
+
+    // Details PDF
+    $details = "";
+    if(isset($_FILES['details'])){
+        $target_file = $_SERVER['DOCUMENT_ROOT'] . "/PDF/" . basename($_FILES["details"]["name"]);
+        if (move_uploaded_file($_FILES["details"]["tmp_name"], $target_file)) {
+            //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+        $details =  $conn->real_escape_string(basename($_FILES["details"]["name"]));
+    } else {
+        //todo make it so you don't have to reupload the pdf every time.
+    }
+
     $points = $conn->real_escape_string($_POST['points']);
     $timelimit = $conn->real_escape_string($_POST['timelimit']);
     $memlimit = $conn->real_escape_string($_POST['memlimit']);
     $sample_input = $conn->real_escape_string($_POST['sample_input']);
     $sample_output = $conn->real_escape_string($_POST['sample_output']);
-    $input = $conn->real_escape_string("[]");
-    $output = $conn->real_escape_string("[]");
-
+    $input = $conn->real_escape_string($_POST['input']);
+    $output = $conn->real_escape_string($_POST['output']);
+    
     $query = "UPDATE problems SET 
                     name='$name', 
                     details='$details', 
@@ -45,7 +59,7 @@ if(isset($_POST['name'])) {
 
     if ($conn->query($query) === TRUE) {
         echo renderPageHead("Edit Problem - Done -");
-        echo printCard("BayviewJudge - The problem has been edited. NOTE: Now you must upload the testcase ZIP.");
+        echo printCard("BayviewJudge - The problem has been edited.");
         ?>
         <a class="waves-effect waves-light btn" href="<?php echo $config['page_root']?>/Admin/index.php"><i class="material-icons left">cloud</i>Admin Home</a>
         <?php
