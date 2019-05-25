@@ -28,8 +28,8 @@ if(isset($_POST['name'])) {
     $memlimit = $conn->real_escape_string($_POST['memlimit']);
     $sample_input = $conn->real_escape_string($_POST['sample_input']);
     $sample_output = $conn->real_escape_string($_POST['sample_output']);
-    $input = $conn->real_escape_string($_POST['input']);
-    $output = $conn->real_escape_string($_POST['output']);
+    $input = $conn->real_escape_string("[]");
+    $output = $conn->real_escape_string("[]");
 
 
     $query = "INSERT INTO problems (name, details, points, timelimit, memlimit, sample_in, sample_out, in_cases, out_cases) 

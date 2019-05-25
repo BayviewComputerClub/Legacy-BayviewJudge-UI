@@ -77,7 +77,7 @@ echo renderPageHead("Create Problem - Admin");
                         <label for="sample_output">Sample Output</label>
                     </div>
                 </div>
-
+                <!--
                 <div class="row">
                     <div class="input-field col s12">
                         <textarea id="input" class="materialize-textarea" name="input"></textarea>
@@ -91,7 +91,7 @@ echo renderPageHead("Create Problem - Admin");
                         <label for="output">Output JSON</label>
                     </div>
                 </div>
-
+                -->
 
                 <div class="row">
                     <div class="input-field col s12">
