@@ -9,9 +9,6 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 echo renderPageHead("View Problems");
 
 
-
-// todo: Place a check mark to show if a problem was solved by the user.
-
 // Page Contents:
 ?>
 
@@ -19,13 +16,15 @@ echo renderPageHead("View Problems");
         <div class="card-content black-text">
             <div class="row">
                 <h4>Problems</h4>
+                <a href="ViewSubmissions.php" class="btn waves-effect">Your Submissions</a>
+                <hr />
                 <table>
                     <thead>
                     <tr>
                         <th>Name</th>
                         <th>Points</th>
-                        <th>Submit Solution</th>
-                        <th>Solution Submitted</th>
+                        <th>View Problem & Submit Solution</th>
+                        <th>Problem Attempted</th>
                     </tr>
                     </thead>
 
@@ -49,10 +48,11 @@ echo renderPageHead("View Problems");
 
                             $query = "SELECT COUNT(*) AS total FROM submissions WHERE problem_id=$problemID AND user_id=$userID";
                             $result = $conn->query($query)->fetch_assoc();
+                            //var_dump($result['total']);
 
                             $isDoneEmoji = "❌";
 
-                            if($result > 0) {
+                            if($result['total'] > 0) {
                                 $isDoneEmoji = "✅";
                             }
                             ?>

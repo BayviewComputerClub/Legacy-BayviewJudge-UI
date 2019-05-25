@@ -56,7 +56,7 @@ function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output, 
     return $response;
 }
 
-function addSubmissionToSQL($result, $batch, $points, $source) {
+function addSubmissionToSQL($result, $batch, $points, $source, $lang) {
     // AC: Accepted, WA: Wrong Answer, TLE: Time Limit Exceeded, CE: Compile Error
 
     $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
@@ -72,7 +72,9 @@ function addSubmissionToSQL($result, $batch, $points, $source) {
 
     // First delete any old submissions.
     $query = "DELETE FROM submissions WHERE user_id=$user_id AND problem_id=$problem_id AND batch=$batch";
-    $conn->query($query);
+    if(!$conn->query($query)) {
+        echo "There was a MySQL Query Error. Did the database crash?<hr />"."Error: " . $query . "<br>" . $conn->error;
+    }
 
     $query = "INSERT INTO submissions (user_id, problem_id, batch, result, points) 
               VALUES ($user_id, $problem_id, $batch, '$result', $points)";
@@ -80,14 +82,16 @@ function addSubmissionToSQL($result, $batch, $points, $source) {
     if ($conn->query($query) === TRUE) {
         // Don't do anything special.
     } else {
-        echo "Error: " . $query . "<br>" . $conn->error;
+        echo "There was a MySQL Query Error. Did the database crash? <hr />"."Error: " . $query . "<br>" . $conn->error;
     }
 
-    // Add to the submission vault. todo
-    //$source_base64 = base64_encode($source);
-    //$query = "INSERT INTO submissions_vault (user_id, problem_id, batch, result, points, source, runtime, submit_time)
-    //          VALUES ($user_id, $problem_id, $batch, '$result', $points, '$source_base64', 0)";
-    //$conn->query($query);
+    // Add to the submission vault.
+    $source_base64 = base64_encode($source);
+    $query = "INSERT INTO submissions_vault (user_id, problem_id, batch, result, points, source, lang,  runtime)
+              VALUES ($user_id, $problem_id, $batch, '$result', $points, '$source_base64', '$lang', 0)";
+    if(!$conn->query($query)) {
+        echo "There was a MySQL Query Error. Did the database crash?<hr />"."Error: " . $query . "<br>" . $conn->error;
+    }
 
     $conn->close();
 }
@@ -159,7 +163,7 @@ if(isset($_POST['lang'])) {
         echo "<br />";
         // Write the answer to SQL
         if($answerAccepted) {
-            addSubmissionToSQL("AC", $i, $out_cases[$i]->points, $_POST['code']);
+            addSubmissionToSQL("AC", $i, $in_cases[$i]->points, $_POST['code'], $_POST['lang']);
         }
     }
     echo "<strong>Execution Complete.</strong>";
