@@ -13,22 +13,15 @@ if(!isset($_SESSION['id'])) {
 echo renderPageHead("Create Problem - Admin");
 ?>
 
-<script src='https://cloud.tinymce.com/5/tinymce.min.js'></script>
-<script>
-    tinymce.init({
-        selector: '#details'
-    });
-</script>
-
 <div class="card white hoverable">
     <div class="card-content black-text">
         <div class="row">
             <h4>Submit new problem</h4>
-            <p>Note! The Input and Output cases must be in a JSON Array, with each index being a single test case (in and output).</p>
+
             <p>Sample In and Out are just text blocks, rendered to the user (don't forget to add them as your first test case)</p>
         </div>
         <div class="row">
-            <form class="col s12" action="<?php echo $config['page_root'] ?>/Admin/Controllers/CreateProblem.php" method="post">
+            <form enctype="multipart/form-data" class="col s12" action="<?php echo $config['page_root'] ?>/Admin/Controllers/CreateProblem.php" method="post">
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="name" type="text" class="validate" name="name">
@@ -39,7 +32,7 @@ echo renderPageHead("Create Problem - Admin");
                 <div class="row">
                     <div class="input-field col s12">
                         <p>Problem Details</p>
-                        <textarea id="details" name="details"></textarea>
+                        <input type="file" name="details" id="details">
                     </div>
                 </div>
 

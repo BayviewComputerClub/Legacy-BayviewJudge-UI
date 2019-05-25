@@ -17,7 +17,7 @@ echo renderPageHead("Submit Solution");
 
             <h3><?php echo $problem['name'] ?></h3>
             <hr />
-            <p><?php echo $problem['details'] ?></p>
+            <p><iframe style="width: 100%; height: 90vh;" src="<?php echo urldecode($config['page_root'] . "/PDF/" .$problem['details']) ?>"></iframe></p>
             <p>Execution Time Limit: <?php echo $problem['timelimit'] ?>s</p>
             <p>Memory Limit: <?php echo $problem['memlimit'] ?>MB</p>
             <hr />

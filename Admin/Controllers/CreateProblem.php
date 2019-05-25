@@ -22,7 +22,17 @@ if(isset($_POST['name'])) {
 
     // POST Data (escaped)
     $name = $conn->real_escape_string($_POST['name']);
-    $details = $conn->real_escape_string($_POST['details']);
+    //$details = $conn->real_escape_string($_POST['details']);
+
+    // Details PDF
+    $target_file = $_SERVER['DOCUMENT_ROOT'] . "/PDF/" . basename($_FILES["details"]["name"]);
+    if (move_uploaded_file($_FILES["details"]["tmp_name"], $target_file)) {
+        //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+    $details =  $conn->real_escape_string(basename($_FILES["details"]["name"]));
+
     $points = $conn->real_escape_string($_POST['points']);
     $timelimit = $conn->real_escape_string($_POST['timelimit']);
     $memlimit = $conn->real_escape_string($_POST['memlimit']);
