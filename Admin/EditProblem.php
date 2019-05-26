@@ -109,7 +109,6 @@ echo renderPageHead("Edit Problems - Admin -");
                         </div>
                     </div>
 
-
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="submit" type="submit" class="waves-effect waves-light btn" value="Edit">

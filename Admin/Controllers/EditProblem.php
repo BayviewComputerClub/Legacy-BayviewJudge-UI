@@ -52,7 +52,7 @@ if(isset($_POST['name'])) {
                     timelimit=$timelimit, 
                     memlimit=$memlimit, 
                     sample_in='$sample_input', 
-                    sample_out='$sample_output', 
+                    sample_out='$sample_output'
               WHERE id=$id";
 
     if ($conn->query($query) === TRUE) {
