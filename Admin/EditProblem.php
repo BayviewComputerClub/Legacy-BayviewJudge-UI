@@ -108,20 +108,6 @@ echo renderPageHead("Edit Problems - Admin -");
                             <label for="sample_output">Sample Output</label>
                         </div>
                     </div>
-                    <!--
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="input" class="materialize-textarea" name="input"><?php echo $problem['in_cases'] ?></textarea>
-                            <label for="input">Input JSON</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="output" class="materialize-textarea" name="output"><?php echo $problem['out_cases'] ?></textarea>
-                            <label for="output">Output JSON</label>
-                        </div>
-                    </div>-->
 
 
                     <div class="row">

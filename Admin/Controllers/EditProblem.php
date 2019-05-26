@@ -44,7 +44,7 @@ if(isset($_POST['name'])) {
     $sample_output = $conn->real_escape_string($_POST['sample_output']);
     $input = $conn->real_escape_string($_POST['input']);
     $output = $conn->real_escape_string($_POST['output']);
-    
+
     $query = "UPDATE problems SET 
                     name='$name', 
                     details='$details', 
@@ -53,8 +53,6 @@ if(isset($_POST['name'])) {
                     memlimit=$memlimit, 
                     sample_in='$sample_input', 
                     sample_out='$sample_output', 
-                    in_cases='$input', 
-                    out_cases='$output' 
               WHERE id=$id";
 
     if ($conn->query($query) === TRUE) {

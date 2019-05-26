@@ -21,10 +21,10 @@ echo renderPageHead("Submit Solution");
             <p>Execution Time Limit: <?php echo $problem['timelimit'] ?>s</p>
             <p>Memory Limit: <?php echo $problem['memlimit'] ?>MB</p>
             <hr />
-            <h4>Sample Input</h4>
+            <!-- <h4>Sample Input</h4>
             <p><?php echo $problem['sample_in'] ?></p>
             <h4>Sample Output</h4>
-            <p><?php echo $problem['sample_out'] ?></p>
+            <p><?php echo $problem['sample_out'] ?></p> -->
 
         </div>
         <div class="row">
