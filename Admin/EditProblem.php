@@ -84,14 +84,14 @@ echo renderPageHead("Edit Problems - Admin -");
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="timelimit" type="number" step="1" class="validate" value="<?php echo $problem['timelimit'] ?>" name="timelimit">
-                            <label for="timelimit">Time Lime (Seconds)</label>
+                            <label for="timelimit">Time Limit (Seconds)</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="memlimit" type="number" step="1" class="validate" value="<?php echo $problem['memlimit'] ?>" name="memlimit">
-                            <label for="memlimit">Memory Lime (Megabytes)</label>
+                            <label for="memlimit">Memory Limit (Megabytes)</label>
                         </div>
                     </div>
 
