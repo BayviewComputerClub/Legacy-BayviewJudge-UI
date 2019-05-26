@@ -30,7 +30,7 @@ function renderPageFoot() {
           <div class="footer-copyright">
             <div class="container">
             © 2019 Seshan Ravikumar. 
-            <a class="grey-text text-lighten-4 right" href="https://bayview.club">Club Website</a>
+            <a class="grey-text text-lighten-4 right" href="$pageRoot/Admin">Admin</a> - <a class="grey-text text-lighten-4 right" href="https://bayview.club">Club Website</a>
             </div>
           </div>
         </footer>
