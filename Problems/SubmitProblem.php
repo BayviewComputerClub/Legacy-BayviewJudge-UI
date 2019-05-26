@@ -38,6 +38,7 @@ echo renderPageHead("Submit Solution");
                             <option value="" disabled selected>Select a language</option>
                             <option value="c++">C++</option>
                             <option value="java">Java</option>
+                            <option value="python">Python 3</option>
                         </select>
                         <label>Language</label>
                     </div>
