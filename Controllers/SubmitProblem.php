@@ -145,7 +145,8 @@ if(isset($_POST['lang'])) {
                     echo str_pad("Accepted",4096);
                 } else {
                     if($response->isCompileError) {
-                        echo 'Compile Error';
+                        echo 'Compile Error: ';
+                        echo $response->errorContent;
                         $answerAccepted = FALSE;
                     } else if($response->isCompileError) {
                         echo 'Time Limit Exceeded';
