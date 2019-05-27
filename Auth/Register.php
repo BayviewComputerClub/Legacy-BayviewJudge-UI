@@ -13,6 +13,9 @@ echo renderPageHead("Register");
 // Page Contents:
 ?>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
 <div class="card white hoverable">
     <div class="card-content black-text">
         <div class="row">
@@ -41,6 +44,13 @@ echo renderPageHead("Register");
                         <label for="email">Email</label>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <div class="g-recaptcha" data-sitekey="6LcwmaUUAAAAAK2Gx52nJ-6LdyVP_28m9LYfOqsv"></div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="submit" type="submit" class="waves-effect waves-light btn" value="Register">

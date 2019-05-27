@@ -9,6 +9,30 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Parts/Helpers.php");
 // Does the query have data
 if(isset($_POST['username'])) {
 
+    // Check Captcha first.
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = array(
+        'secret' => '6LcwmaUUAAAAABPvQ5DblLIPAyY5G8MHZygqWWAd',
+        'response' => $_POST["g-recaptcha-response"]
+    );
+    $options = array(
+        'http' => array (
+            'method' => 'POST',
+            'content' => http_build_query($data)
+        )
+    );
+    $context  = stream_context_create($options);
+    $verify = file_get_contents($url, false, $context);
+    $captcha_success=json_decode($verify);
+    if ($captcha_success->success==false) {
+        echo renderPageHead("Captcha Error");
+        echo printCard("BayviewJudge - There was an error with the captcha. Are you a bot? If not, try again!");
+        echo renderPageFoot();
+        die();
+    } else if ($captcha_success->success==true) {
+        // OK, continue
+    }
+
     // Create connection object
     $conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
     // Check connection
