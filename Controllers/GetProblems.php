@@ -10,8 +10,6 @@ function getProblems() {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $username = $conn->real_escape_string($_POST['username']);
-
     $query = "SELECT * FROM problems";
     $result = $conn->query($query);
 
