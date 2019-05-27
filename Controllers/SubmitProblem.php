@@ -168,6 +168,7 @@ if(isset($_POST['lang'])) {
         }
     }
     echo "<strong>Execution Complete.</strong>";
+    echo "<a class=\"waves-effect waves-light btn\" href=\"" . $config['page_root'] . "/Admin/CreateProblem.php\"><i class=\"material-icons left\">cloud</i>Back to problem.</a>";
 
     //var_dump( $response );
 
