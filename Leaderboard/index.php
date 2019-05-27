@@ -39,6 +39,7 @@ echo renderPageHead("Leaderboard");
                             $submissions = getUserSubmissionsByID($user['id']);
                             $problem = getProblems();
                             $solvedProblems = array();
+                            echo "| ";
                             foreach($submissions as $submission) {
                                 //echo "hi";
                                 for($i = 0; $i < count($problem);$i++) {
