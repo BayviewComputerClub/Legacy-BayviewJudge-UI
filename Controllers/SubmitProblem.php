@@ -29,8 +29,8 @@ function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output, 
         'userID' => $userID,
         'inputCode' => base64_encode($inputCode),
         'lang' => $lang,
-        'input' => base64_encode($input),
-        'output' => base64_encode($output),
+        'input' => $input,
+        'output' => $output,
         'timelimit' => $timelimit*1000 // Seconds to Milliseconds
     );
 
