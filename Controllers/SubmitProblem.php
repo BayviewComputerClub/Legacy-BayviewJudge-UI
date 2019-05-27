@@ -34,7 +34,7 @@ function judgeSolution($problemID, $userID, $inputCode, $lang, $input, $output, 
         'timelimit' => $timelimit*1000 // Seconds to Milliseconds
     );
 
-    //echo json_encode($data);
+    echo json_encode($data);
 
     $context = stream_context_create(array(
         'http' => array(
