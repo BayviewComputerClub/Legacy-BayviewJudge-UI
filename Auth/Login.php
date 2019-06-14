@@ -9,7 +9,7 @@ if(isset($_SESSION['id'])) {
     die();
 }
 
-echo renderPageHead("Login");
+echo renderPageHead("Login | BayviewJudge");
 // Page Contents:
 ?>
 
