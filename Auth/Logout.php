@@ -7,7 +7,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/Helpers.php");
 
-echo renderPageHead("Logged out");
+echo renderPageHead("Logged out | BayviewJudge");
 $home = $config['page_root'];
 echo printCard("<strong>You have been logged out!</strong> <br /> <a href='$home' class='btn'>Back to Home</a> ");
 echo renderPageFoot();

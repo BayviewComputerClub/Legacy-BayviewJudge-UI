@@ -9,7 +9,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 $problem = getProblemByID($_GET['id']);
 //TODO account login check
 
-echo renderPageHead("Submit Solution");
+echo renderPageHead("Submit Solution | BayviewJudge");
 ?>
 <div class="card white hoverable">
     <div class="card-content black-text">

@@ -4,7 +4,7 @@ $config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/Config/config.ini");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-head.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 
-echo renderPageHead("About");
+echo renderPageHead("About | BayviewJudge");
 ?>
 <div class="card white hoverable">
     <div class="card-content black-text">

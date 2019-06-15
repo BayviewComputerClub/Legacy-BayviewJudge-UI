@@ -8,7 +8,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetUser.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetSubmissions.php");
 
-echo renderPageHead("Submission Vault");
+echo renderPageHead("Submission Vault | BayviewJudge");
 
 // Page Contents:
 ?>

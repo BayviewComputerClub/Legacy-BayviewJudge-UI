@@ -6,7 +6,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Parts/page-foot.php");
 
 include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 
-echo renderPageHead("View Problems");
+echo renderPageHead("View Problems | BayviewJudge");
 
 
 // Page Contents:

@@ -8,7 +8,7 @@ include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetUser.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Controllers/GetProblems.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/Util/SiteMetadata.php");
 
-echo renderPageHead("Leaderboard");
+echo renderPageHead("Leaderboard | BayviewJudge");
 // Page Contents:
 ?>
 
