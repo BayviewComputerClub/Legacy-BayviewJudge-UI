@@ -1,6 +1,6 @@
 # BayviewJudge UI
 
-Web UI for the Bayview Computer Club's Online Judge
+Historically this was the "full stack" web frontend for BayviewJudge, however this is now being transitioned into a RESTful backend, and the actual UI will be a React webapp.
 
 Don't forget to have a [grader server][1] too!
 
