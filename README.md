@@ -1,6 +1,6 @@
-# BayviewJudge UI
+> This was the original attempt at writing our judging platform. It was written in PHP (with no regards to standards), and was linked with the (now legacy) Grader server written in Node.
 
-Historically this was the "full stack" web frontend for BayviewJudge, however this is now being transitioned into a RESTful backend, and the actual UI will be a React webapp.
+# BayviewJudge UI
 
 Don't forget to have a [grader server][1] too!
 
@@ -51,7 +51,7 @@ The corresponding output cases would look as such:
 **Before adding a problem to the judge, make sure your input and output cases are valid JSON!**
 
 
-[1]: https://github.com/BayviewComputerClub/BayviewJudge-Grader
+[1]: https://github.com/BayviewComputerClub/Legacy-BayviewJudge-Grader
 [2]: https://www.apachefriends.org/download.html
 [3]: https://github.com/BayviewComputerClub/BayviewJudge-UI/archive/master.zip
 [4]: https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04
